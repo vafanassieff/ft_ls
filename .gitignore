@@ -1,0 +1,5 @@
+#Ignoring useless stuff
+
+*.o
+ft_ls
+*.a
