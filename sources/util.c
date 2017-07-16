@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/16 19:47:52 by vafanass         ###   ########.fr       */
+/*   Created: 2017/07/16 16:34:33 by vafanass          #+#    #+#             */
+/*   Updated: 2017/07/16 16:35:01 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	init(unsigned int *flag)
+void printbits(unsigned int v)
 {
-	*flag = 0;
-}
+  	int i;
 
-int 	main(int argc, char **argv)
-{
-	unsigned int flag;
-
-	init(&flag);
-	get_arg(argc, argv, &flag);
-	printbits(flag);
-	//printf("\n dir_index = %d\n", e->dir_index);
-	return(0);
+  	i = 31;
+ 	 while (i >= 0)
+ 	 {
+  		putchar('0' + ((v >> i) & 1));
+		i--;
+  	}
 }

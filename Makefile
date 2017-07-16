@@ -1,6 +1,6 @@
 # Compilation
 CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror -g
+CFLAGS =	
 ADDFLAGS =	
 
 # Precompiled header
@@ -22,7 +22,9 @@ INCDIR =	includes\
 PREDIR =	includes
 
 # Sources
-SRC =		main.c
+SRC =		util.c\
+			flag.c\
+			main.c
 
 OBJ =		$(SRC:.c=.o)
 
