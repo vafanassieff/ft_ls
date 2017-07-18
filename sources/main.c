@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/18 18:40:28 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/18 21:21:49 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ int 	main(int argc, char **argv)
 	int i = 0;
 	while (++i < argc)
 		PushBack(&MaListe, argv[i]);
-	View(MaListe);
+	printf("%s\n",MaListe.last->info->path);
 	return(0);
 }
