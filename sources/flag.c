@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/16 19:46:36 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/18 18:27:05 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void 	add_arg(unsigned int *flag, char *arg)
 	int i;
 
 	len = ft_strlen(arg);
+	if (len == 1 && arg[0] == '-')
+	{
+		printf("toto");
+		exit(0);
+	}
 	i = 1;
 	
 	while (i < len)

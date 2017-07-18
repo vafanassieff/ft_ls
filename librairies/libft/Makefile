@@ -6,7 +6,7 @@
 #    By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/15 12:51:54 by vafanass          #+#    #+#              #
-#    Updated: 2017/02/15 12:52:06 by vafanass         ###   ########.fr        #
+#    Updated: 2017/07/18 16:51:50 by vafanass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,12 +82,6 @@ SRC =\
 		   ft_strtrim.c \
 		   ft_strmapi.c \
 		   ft_strsplit.c \
-		   ft_lstnew.c \
-		   ft_lstdelone.c \
-		   ft_lstdel.c \
-		   ft_lstadd.c \
-		   ft_lstiter.c \
-		   ft_lstmap.c \
 		   ft_power.c \
 		   ft_swap.c \
 		   ft_recursive_factorial.c \

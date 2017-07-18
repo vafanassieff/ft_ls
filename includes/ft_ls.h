@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/16 19:54:45 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/18 18:30:41 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,23 @@
 
 # define OPT_LIST		"Rlart"
 
-typedef struct 		s_infos{
+typedef struct 		s_info
+{
 	char			*path;
 	int				type;
 }					t_info;
 
-typedef struct 		s_llist{
+typedef struct 		s_elem{
 	t_info			*info;
-	struct t_llist	*next;
-	struct t_llist	*prev;
-}					t_llist;
+	struct s_elem	*next;
+	struct s_elem	*prev;
+}					t_elem;
+
+typedef struct		s_list
+{
+	t_elem			*first;
+	t_elem			*last;
+}					t_list;
 
 void 				printbits(unsigned int v);
 void	get_arg(int argc, char ** argv, unsigned int *flag);
