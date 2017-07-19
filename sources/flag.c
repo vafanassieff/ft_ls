@@ -6,22 +6,11 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/18 18:27:05 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/19 15:33:55 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-
-void 	error_opt(char opt)
-{
-	ft_putstr("ft_ls: illegal option -- ");
-	ft_putchar(opt);
-	ft_putchar('\n');
-	ft_putstr("usage: ft_ls [-aRlrt] [file ...]");
-	ft_putchar('\n');
-	exit(1);
-}
 
 BOOL	check_opt(char opt)
 {
@@ -37,11 +26,6 @@ void 	add_arg(unsigned int *flag, char *arg)
 	int i;
 
 	len = ft_strlen(arg);
-	if (len == 1 && arg[0] == '-')
-	{
-		printf("toto");
-		exit(0);
-	}
 	i = 1;
 	
 	while (i < len)
@@ -62,14 +46,14 @@ void 	add_arg(unsigned int *flag, char *arg)
 	}
 }
 
-void	get_arg(int argc, char ** argv, unsigned int *flag)
+void	get_arg(int argc, char ** argv, unsigned int *flag, t_list *list)
 {
 	int i;
-
+	t_info *info;
 	i = 1;
 	while (i < argc)
 	{
-		if (argv[i][0] == '-')
+		if (argv[i][0] == '-' && argv[i][1] != '\0')
 			add_arg(flag, argv[i]);
 		else
 			break;
@@ -77,6 +61,14 @@ void	get_arg(int argc, char ** argv, unsigned int *flag)
 	}
 	while (i < argc)
 	{
+		info = init_info(info);
+		info->path = ft_strdup(argv[i]);
+		push_back(list, info);
 		i++;
+	}
+	if (i == 2 || i == 1)
+	{
+		info = init_info(info);
+		push_back(list, info);
 	}
 }

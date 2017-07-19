@@ -3,6 +3,11 @@
 		"stdio.h": "c",
 		"ft_ls.h": "c",
 		"types.h": "c",
-		"xattr.h": "c"
+		"xattr.h": "c",
+		"_null.h": "c",
+		"stdlib.h": "c",
+		"time.h": "c",
+		"ft_ls": "c",
+		"pwd.h": "c"
 	}
 }

@@ -24,6 +24,8 @@ PREDIR =	includes
 # Sources
 SRC =		util.c\
 			flag.c\
+			list.c\
+			error.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)

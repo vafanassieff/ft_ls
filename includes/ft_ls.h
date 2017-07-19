@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/18 18:30:41 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/19 15:32:10 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ typedef struct		s_list
 }					t_list;
 
 void 				printbits(unsigned int v);
-void	get_arg(int argc, char ** argv, unsigned int *flag);
-
+void				get_arg(int argc, char ** argv, unsigned int *flag, t_list *list);
+void 				push_back(t_list *l, t_info *info);
+void 				push_front(t_list *l, t_info *info);
+void 				view_list(t_list l);
+t_info				*init_info(t_info *info);
+void 				error_opt(char opt);
 #endif
