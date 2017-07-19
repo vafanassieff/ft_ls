@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/19 21:04:52 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/19 21:26:51 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,13 @@ void	get_arg(int argc, char ** argv, unsigned int *flag, t_list *list)
 	int		test;
 	t_info	*info;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
 		if (argv[i][0] == '-' && argv[i][1])
 			add_arg(flag, argv[i]);
 		else
 			break;
-		i++;
 	}
 	while (i < argc)
 	{

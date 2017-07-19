@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 15:03:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/19 20:22:44 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/19 21:30:28 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,4 @@ void	open_error(char *str)
 		ft_putstr(str);
 		ft_putstr(": ");
 		perror("");
-		exit(0);
 }
