@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/19 15:32:10 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/19 21:01:18 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <pwd.h>
 # include <grp.h>
 # include <uuid/uuid.h>
+# include <errno.h>
 
 # define UINT unsigned int
 # define BOOL int
@@ -41,6 +42,7 @@
 typedef struct 		s_info
 {
 	char			*path;
+	char			*name;
 	int				type;
 }					t_info;
 
@@ -60,7 +62,10 @@ void 				printbits(unsigned int v);
 void				get_arg(int argc, char ** argv, unsigned int *flag, t_list *list);
 void 				push_back(t_list *l, t_info *info);
 void 				push_front(t_list *l, t_info *info);
-void 				view_list(t_list l);
-t_info				*init_info(t_info *info);
+void free_list(t_list *l);
+void 				view_list(t_list *l);
+t_info	*init_info();
 void 				error_opt(char opt);
+void	open_error(char *str);
+int		count_list(t_list *l);
 #endif

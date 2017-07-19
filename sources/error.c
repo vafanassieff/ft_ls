@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 15:03:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/19 15:32:06 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/19 20:22:44 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,13 @@ void 	error_opt(char opt)
 	ft_putstr("usage: ft_ls [-aRlrt] [file ...]");
 	ft_putchar('\n');
 	exit(1);
+}
+
+void	open_error(char *str)
+{
+		ft_putstr("ft_ls: ");
+		ft_putstr(str);
+		ft_putstr(": ");
+		perror("");
+		exit(0);
 }

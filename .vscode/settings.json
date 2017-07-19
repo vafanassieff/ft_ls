@@ -8,6 +8,8 @@
 		"stdlib.h": "c",
 		"time.h": "c",
 		"ft_ls": "c",
-		"pwd.h": "c"
+		"pwd.h": "c",
+		"unistd.h": "c",
+		"_s_ifmt.h": "c"
 	}
 }

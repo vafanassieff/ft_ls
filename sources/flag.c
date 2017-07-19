@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/19 15:33:55 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/19 21:04:52 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void 	add_arg(unsigned int *flag, char *arg)
 	int i;
 
 	len = ft_strlen(arg);
-	i = 1;
+	i = 0;
 	
-	while (i < len)
+	while (i++ < len)
 	{
 		if (check_opt(arg[i]) == FALSE)
 			error_opt(arg[i]);
@@ -42,18 +42,19 @@ void 	add_arg(unsigned int *flag, char *arg)
 			*flag += BYTE_RS;
 		else if (arg[i] == 't' && !(*flag & BYTE_T))
 			*flag += BYTE_T;
-		i++;
 	}
 }
 
 void	get_arg(int argc, char ** argv, unsigned int *flag, t_list *list)
 {
-	int i;
-	t_info *info;
+	int 	i;
+	int		test;
+	t_info	*info;
+
 	i = 1;
 	while (i < argc)
 	{
-		if (argv[i][0] == '-' && argv[i][1] != '\0')
+		if (argv[i][0] == '-' && argv[i][1])
 			add_arg(flag, argv[i]);
 		else
 			break;
@@ -61,14 +62,16 @@ void	get_arg(int argc, char ** argv, unsigned int *flag, t_list *list)
 	}
 	while (i < argc)
 	{
-		info = init_info(info);
+		info = init_info();
 		info->path = ft_strdup(argv[i]);
 		push_back(list, info);
 		i++;
+		test = TRUE;
 	}
-	if (i == 2 || i == 1)
+	if (test != TRUE)
 	{
-		info = init_info(info);
+		info = init_info();
+		info->path = ft_strdup("./");
 		push_back(list, info);
 	}
 }
