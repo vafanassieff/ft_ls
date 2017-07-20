@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/19 15:03:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 14:31:09 by vafanass         ###   ########.fr       */
+/*   Created: 2017/07/20 16:14:52 by vafanass          #+#    #+#             */
+/*   Updated: 2017/07/20 16:17:10 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void 	error_opt(char opt)
+void 	sort_list(t_elem *first, unsigned int flag)
 {
-	ft_putstr("ft_ls: illegal option -- ");
-	ft_putchar(opt);
-	ft_putchar('\n');
-	ft_putstr("usage: ft_ls [-aRlrt] [file ...]");
-	ft_putchar('\n');
-	exit(1);
+	if (flag & BYTE_T)
+		printf("sort t");
+	else
+		sort_list_ascii(first);
 }
 
-void	get_perror(char *str, int close)
+void	sort_list_ascii(t_elem *first)
 {
-		ft_putstr("ft_ls: ");
-		ft_putstr(str);
-		ft_putstr(": ");
-		perror("");
-		if (close == TRUE)
-			exit(1);
+	t_elem *tmp;
+	int		len;
+	
+	len = count_list(first);
+	tmp = first;
+	while (len)
+	{
+		while (tmp->next)
+		{
+			if (ft_strcmp(tmp->info->path, tmp->next->info->path) > 0)
+				swap_elem_content(&tmp, &tmp->next);
+			tmp = tmp->next;
+		}
+		tmp = first;
+		len--;
+	}
 }

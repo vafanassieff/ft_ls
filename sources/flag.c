@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/19 21:26:51 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/20 15:30:30 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,32 @@ void	get_arg(int argc, char ** argv, unsigned int *flag, t_list *list)
 		info = init_info();
 		info->path = ft_strdup("./");
 		push_back(list, info);
+	}
+}
+
+void	verif_arg(t_list *l)
+{
+	t_elem	*tmp;
+	t_elem	*remove;
+	struct 	stat s;
+
+	tmp = l->first;
+	while (tmp)
+	{
+		if (stat(tmp->info->path,&s) < 0)
+		{
+			get_perror(tmp->info->path, 0);
+			remove = tmp;
+			tmp = tmp->next;
+			remove_elem(remove, l);
+		}
+		else
+		{
+			if (S_ISDIR(s.st_mode))
+				tmp->info->is_dir = 1;
+			else
+				tmp->info->is_dir = 0;
+			tmp = tmp->next;
+		}
 	}
 }

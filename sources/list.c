@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 14:42:07 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 13:56:23 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/20 16:15:10 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,26 +104,6 @@ void	swap_elem_content(t_elem **a, t_elem **b)
 	temp = (*a)->info;
 	(*a)->info = (*b)->info;
 	(*b)->info = temp;
-}
-
-void	sort_list_ascii(t_elem *first)
-{
-	t_elem *tmp;
-	int		len;
-	
-	len = count_list(first);
-	tmp = first;
-	while (len)
-	{
-		while (tmp->next)
-		{
-			if (ft_strcmp(tmp->info->path, tmp->next->info->path) > 0)
-				swap_elem_content(&tmp, &tmp->next);
-			tmp = tmp->next;
-		}
-		tmp = first;
-		len--;
-	}
 }
 
 void	remove_elem(t_elem *elem, t_list *list)
