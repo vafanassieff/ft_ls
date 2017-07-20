@@ -6,31 +6,11 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/19 22:03:48 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/20 13:47:51 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-t_info	*init_info()
-{
-	t_info *info;
-	
-	info = malloc(sizeof(t_info));
-	if (!info)
-		exit(0);
-	info->path = NULL;
-	info->name = NULL;
-	info->type = 0;
-	return (info);
-}
-
-void	init(unsigned int *flag, t_list *l)
-{
-   	l->first = NULL;
-   	l->last = NULL;
-	*flag = 0;
-}
 
 void	read_folder(t_list *cur, char *path)
 {
@@ -80,30 +60,22 @@ void 	fill_arg(unsigned int flag, t_list *l)
 	}
 }
 
-void	swap(t_elem **a, t_elem **b)
+void	verif_arg(t_list *l)
 {
-	t_info *temp;
-
-	temp = (*a)->info;
-	(*a)->info = (*b)->info;
-	(*b)->info = temp;
-}
-
-void	sort_list(t_elem *lst, int len)
-{
-	t_elem *tmp;
-
-	tmp = lst;
-	while (len)
+	t_elem	*tmp;
+	t_elem	*remove;
+	
+	tmp = l->first;
+	while (tmp)
 	{
-		while (tmp->next)
+		if (ft_strcmp(tmp->info->path,"b") == 0)
 		{
-			if (ft_strcmp(tmp->info->path, tmp->next->info->path) > 0)
-				swap_info(&tmp, &tmp->next);
+			remove = tmp;
 			tmp = tmp->next;
+			remove_elem(remove, l);
 		}
-		tmp = lst;
-		len--;
+		else
+			tmp = tmp->next;
 	}
 }
 
@@ -111,17 +83,17 @@ int 	main(int argc, char **argv)
 {
 	unsigned int 	flag;
 	t_list			list;
-	int				nb;
 	
 	init(&flag, &list);
 	get_arg(argc, argv, &flag, &list);
-	nb = count_list(&list);
-	sort_list(list.first, nb);
-	
+	sort_list_ascii(list.first);
+	verif_arg(&list);
+
 	printbits(flag); // Print flag value
 	
-	fill_arg(flag, &list);
+	//fill_arg(flag, &list);
 	view_list(&list);
 	free_list(&list);
+	while(1);
 	return(0);
 }

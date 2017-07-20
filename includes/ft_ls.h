@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/19 21:01:18 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/20 13:02:58 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,10 @@ void 				view_list(t_list *l);
 t_info	*init_info();
 void 				error_opt(char opt);
 void	open_error(char *str);
-int		count_list(t_list *l);
+int		count_list(t_elem *first);
+void	sort_list_ascii(t_elem *first);
+void	swap_elem_content(t_elem **a, t_elem **b);
+t_info	*init_info();
+void	init(unsigned int *flag, t_list *l);
+void	remove_elem(t_elem *elem, t_list *list);
 #endif

@@ -26,6 +26,7 @@ SRC =		util.c\
 			flag.c\
 			list.c\
 			error.c\
+			init.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)
