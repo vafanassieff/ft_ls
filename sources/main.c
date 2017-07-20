@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 18:32:26 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/20 18:49:53 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,24 @@ void	show_elem(t_list *l, unsigned int flag)
 }
 void	show_file(t_elem *first)
 {
-	t_elem *tmp;
+	t_elem 	*tmp;
+	int 	i;
 
 	tmp = first;
+	i = 0;
 	while (tmp)
 	{
 		if(tmp->info->is_dir == 0)
+		{
 			ft_putendl(tmp->info->name);
+			i++;
+		}
 		tmp = tmp->next;
 	}
-	ft_putchar('\n');
+	if (i > 0)
+		ft_putchar('\n');
 }
+
 void 	fill_arg(unsigned int flag, t_list *l, int nb)
 {
 
@@ -72,7 +79,7 @@ void 	fill_arg(unsigned int flag, t_list *l, int nb)
 			ft_putstr(elem->info->path);
 			ft_putendl(":");
 		}
-		sort_list_ascii(cur.first);
+		sort_list(cur.first, flag);
 		show_elem(&cur, flag);
 		if (elem->next != NULL && elem->info->is_dir == 1)
 			ft_putchar('\n');
