@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 17:43:26 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/20 18:24:47 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	get_arg(int argc, char ** argv, unsigned int *flag, t_list *list)
 	{
 		info = init_info();
 		info->path = ft_strdup(argv[i]);
+		info->name = ft_strdup(argv[i]);
 		push_back(list, info);
 		i++;
 		test = TRUE;
@@ -71,6 +72,7 @@ void	get_arg(int argc, char ** argv, unsigned int *flag, t_list *list)
 	{
 		info = init_info();
 		info->path = ft_strdup("./");
+		info->name = ft_strdup("./");
 		push_back(list, info);
 	}
 }

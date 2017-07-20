@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 16:14:52 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 18:14:29 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/20 18:23:52 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	sort_list_ascii(t_elem *first)
 	{
 		while (tmp->next)
 		{
-			if (ft_strcmp(tmp->info->path, tmp->next->info->path) > 0)
+			if (ft_strcmp(tmp->info->name, tmp->next->info->name) > 0)
 				swap_elem_content(&tmp, &tmp->next);
 			tmp = tmp->next;
 		}
