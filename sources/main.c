@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 16:18:04 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/20 18:09:41 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	show_elem(t_list *l, unsigned int flag)
    t_elem *pelem = l->first;
    while(pelem)
    {
-		if (pelem->info->name[0] != '.')
-     		ft_putendl(pelem->info->name);
+    ft_putendl(pelem->info->name);
      pelem = pelem->next;
    }
 }
@@ -57,13 +56,13 @@ void 	fill_arg(unsigned int flag, t_list *l, int nb)
 		else
 			ft_putendl(elem->info->path);
 		sort_list(cur.first, flag);
-		if (nb > 1)
+		if (nb > 1 && elem->info->is_dir == 1)
 		{
 			ft_putstr(elem->info->path);
 			ft_putendl(":");
 		}
 		show_elem(&cur, flag);
-		if (elem->next != NULL)
+		if (elem->next != NULL && elem->info->is_dir == 1)
 			ft_putchar('\n');
 		free_list(&cur);
 		elem = elem->next;
@@ -78,17 +77,9 @@ int 	main(int argc, char **argv)
 	
 	init(&flag, &list);
 	get_arg(argc, argv, &flag, &list);
-
-	//printbits(flag); // Print flag value
-	//ft_putchar('\n');
 	nb = count_list(list.first);
-	sort_list(list.first, flag);
 	verif_arg(&list);
-
-	//ft_putchar('\n');
-	//view_list(&list); //Show list
-	//ft_putchar('\n');
-	
+	sort_list(list.first, flag);
 	fill_arg(flag, &list, nb);
 	free_list(&list);
 	return(0);

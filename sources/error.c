@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 15:03:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 14:31:09 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/20 17:44:27 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@ void 	error_opt(char opt)
 
 void	get_perror(char *str, int close)
 {
-		ft_putstr("ft_ls: ");
-		ft_putstr(str);
-		ft_putstr(": ");
+		ft_putstr_fd("ft_ls: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": ", 2);
 		perror("");
 		if (close == TRUE)
 			exit(1);
+}
+
+void	error_fts_open()
+{
+	ft_putendl_fd("ft_ls: fts_open: No such file or directory", 2);
+	exit(1);
 }
