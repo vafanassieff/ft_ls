@@ -6,13 +6,13 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:34:33 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/18 18:05:17 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/21 16:46:29 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void printbits(unsigned int v)
+void printbits(UINT v)
 {
   	int i;
 

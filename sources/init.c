@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:51:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 12:51:37 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/21 16:46:38 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_info	*init_info()
 	return (info);
 }
 
-void	init(unsigned int *flag, t_list *l)
+void	init(UINT *flag, t_list *l)
 {
    	l->first = NULL;
    	l->last = NULL;

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 18:24:47 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/21 16:47:18 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ BOOL	check_opt(char opt)
 		return (TRUE);
 }
 
-void 	add_arg(unsigned int *flag, char *arg)
+void 	add_arg(UINT *flag, char *arg)
 {
 	int len;
 	int i;
@@ -45,7 +45,7 @@ void 	add_arg(unsigned int *flag, char *arg)
 	}
 }
 
-void	get_arg(int argc, char ** argv, unsigned int *flag, t_list *list)
+void	get_arg(int argc, char ** argv, UINT *flag, t_list *list)
 {
 	int 	i;
 	int		test;
