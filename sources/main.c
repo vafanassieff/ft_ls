@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/21 16:57:41 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/22 01:48:39 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	show_elem(t_list *l, UINT *flag)
    }
 }
 
-void	show_file(t_list *arg_list, int *nb)
+void	show_file(t_list *arg_list, int nb)
 {
 	t_elem 	*tmp;
 	t_elem	*remove;
@@ -46,7 +46,7 @@ void	show_file(t_list *arg_list, int *nb)
 		else
 			tmp = tmp->next;
 	}
-	if (i != *nb && *nb != 1)
+	if (i != nb && nb != 1 && i != 0)
 		ft_putchar('\n');
 }
 
@@ -66,6 +66,11 @@ void	read_folder(t_list *cur, char *path)
 	}
 	if (closedir(folder) == -1)
 		get_perror(path, 1);
+}
+
+void	recursive(UINT *flag, t_list *l)
+{
+	
 }
 
 void 	fill_arg(UINT *flag, t_list *l, int nb)
@@ -90,11 +95,7 @@ void 	fill_arg(UINT *flag, t_list *l, int nb)
 		if (arg->next != NULL)
 			ft_putchar('\n');
 		if (*flag & BYTE_R)
-		{
-			nav.first = NULL;
-			nav.last = NULL;
-
-		}
+			recursive(flag, &cur);
 		free_list(&cur);
 		arg = arg->next;
 	}
@@ -111,7 +112,7 @@ int 	main(int argc, char **argv)
 	count_list(arg_list.first, &nb);
 	sort_list(arg_list.first, &flag);
 	verif_arg(&arg_list);
-	show_file(&arg_list, &nb);
+	show_file(&arg_list, nb);
 	fill_arg(&flag, &arg_list, nb);
 	free_list(&arg_list);
 	return(0);
