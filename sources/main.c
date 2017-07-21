@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 18:49:53 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/21 15:57:06 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,34 @@ void	show_elem(t_list *l, unsigned int flag)
    t_elem *pelem = l->first;
    while(pelem)
    {
-	   if (pelem->info->name[0] != '.')
+		if (pelem->info->name[0] != '.')
    	 		ft_putendl(pelem->info->name);
-     pelem = pelem->next;
+    	 pelem = pelem->next;
    }
 }
-void	show_file(t_elem *first)
+
+void	show_file(t_list *arg_list, int nb)
 {
 	t_elem 	*tmp;
+	t_elem	*remove;
 	int 	i;
 
-	tmp = first;
+	tmp = arg_list->first;
 	i = 0;
 	while (tmp)
 	{
 		if(tmp->info->is_dir == 0)
 		{
 			ft_putendl(tmp->info->name);
+			remove = tmp;
+			tmp = tmp->next;
+			remove_elem(remove, arg_list);
 			i++;
 		}
-		tmp = tmp->next;
+		else
+			tmp = tmp->next;
 	}
-	if (i > 0)
+	if (i != nb)
 		ft_putchar('\n');
 }
 
@@ -64,27 +70,25 @@ void 	fill_arg(unsigned int flag, t_list *l, int nb)
 {
 
 	t_list			cur;
-	t_elem			*elem;
+	t_elem			*arg;
 
-	cur.first = NULL;
-	cur.last = NULL;
-	elem = l->first;
-	show_file(elem);
-	while(elem)
+	arg = l->first;
+	while(arg)
 	{
-		if(elem->info->is_dir == 1)
-			read_folder(&cur, elem->info->path);
-		if (nb > 1 && elem->info->is_dir == 1)
+		cur.first = NULL;
+		cur.last = NULL;
+		read_folder(&cur, arg->info->path);
+		if (nb > 1)
 		{
-			ft_putstr(elem->info->path);
+			ft_putstr(arg->info->path);
 			ft_putendl(":");
 		}
 		sort_list(cur.first, flag);
 		show_elem(&cur, flag);
-		if (elem->next != NULL && elem->info->is_dir == 1)
+		if (arg->next != NULL)
 			ft_putchar('\n');
 		free_list(&cur);
-		elem = elem->next;
+		arg = arg->next;
 	}
 }
 
@@ -92,14 +96,15 @@ int 	main(int argc, char **argv)
 {
 	unsigned int 	flag;
 	int				nb;
-	t_list			list;
+	t_list			arg_list;
 	
-	init(&flag, &list);
-	get_arg(argc, argv, &flag, &list);
-	nb = count_list(list.first);
-	verif_arg(&list);
-	sort_list(list.first, flag);
-	fill_arg(flag, &list, nb);
-	free_list(&list);
+	init(&flag, &arg_list);
+	get_arg(argc, argv, &flag, &arg_list);
+	nb = count_list(arg_list.first);
+	sort_list(arg_list.first, flag);
+	verif_arg(&arg_list);
+	show_file(&arg_list, nb);
+	fill_arg(flag, &arg_list, nb);
+	free_list(&arg_list);
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 14:42:07 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 17:04:59 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/21 15:40:35 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int		count_list(t_elem *first)
 void view_list(t_list *l)
 {
    t_elem *pelem = l->first;
+   ft_putendl("List Dump :");
    while(pelem)
    {
      printf("Path = %s | is_dir = %d | Name = %s\n", pelem->info->path, pelem->info->is_dir, pelem->info->name);
