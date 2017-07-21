@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 17:43:01 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/21 16:29:00 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,18 @@ void 				printbits(unsigned int v);
 void				get_arg(int argc, char ** argv, unsigned int *flag, t_list *list);
 void 				push_back(t_list *l, t_info *info);
 void 				push_front(t_list *l, t_info *info);
-void free_list(t_list *l);
+void 				free_list(t_list *l);
 void 				view_list(t_list *l);
-t_info	*init_info();
+t_info				*init_info();
 void 				error_opt(char opt);
-void	get_perror(char *str, int close);
-void	error_fts_open();
-int		count_list(t_elem *first);
-void	sort_list_ascii(t_elem *first);
-void	swap_elem_content(t_elem **a, t_elem **b);
-t_info	*init_info();
-void	init(unsigned int *flag, t_list *l);
-void	remove_elem(t_elem *elem, t_list *list);
-void	verif_arg(t_list *l);
-void 	sort_list(t_elem *first, unsigned int flag);
+void				get_perror(char *str, int close);
+void				error_fts_open();
+void				count_list(t_elem *first, int *len);
+void				sort_list_ascii(t_elem *first);
+void				swap_elem_content(t_elem **a, t_elem **b);
+t_info				*init_info();
+void				init(unsigned int *flag, t_list *l);
+void				remove_elem(t_elem *elem, t_list *list);
+void				verif_arg(t_list *l);
+void 				sort_list(t_elem *first, unsigned int *flag);
 #endif

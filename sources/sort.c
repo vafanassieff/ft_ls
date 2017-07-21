@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 16:14:52 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/20 18:23:52 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/21 16:28:17 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sort_list_dir(t_elem *first)
 	t_elem *tmp;
 	int		len;
 	
-	len = count_list(first);
+	count_list(first, &len);
 	tmp = first;
 	while (len)
 	{
@@ -37,7 +37,7 @@ void	sort_list_ascii(t_elem *first)
 	t_elem *tmp;
 	int		len;
 	
-	len = count_list(first);
+	count_list(first, &len);
 	tmp = first;
 	while (len)
 	{
@@ -52,9 +52,9 @@ void	sort_list_ascii(t_elem *first)
 	}
 }
 
-void 	sort_list(t_elem *first, unsigned int flag)
+void 	sort_list(t_elem *first, unsigned int *flag)
 {
-	if (flag & BYTE_T)
+	if (*flag & BYTE_T)
 		printf("sort t");
 	else
 		sort_list_ascii(first);

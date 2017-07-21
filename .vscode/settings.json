@@ -11,6 +11,9 @@
 		"pwd.h": "c",
 		"unistd.h": "c",
 		"_s_ifmt.h": "c",
-		"stat.h": "c"
+		"stat.h": "c",
+		"errno.h": "c",
+		"uuid.h": "c",
+		"dirent.h": "c"
 	}
 }

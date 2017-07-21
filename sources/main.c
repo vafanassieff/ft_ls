@@ -6,37 +6,21 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/21 15:57:06 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/21 16:33:29 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	read_folder(t_list *cur, char *path)
-{
-	DIR				*folder;
-	struct	dirent	*read;
-	t_info			*info;
-
-	folder = opendir(path);
-	while ((read = readdir(folder)) != NULL)
-	{
-		info = init_info();
-		info->path = ft_strdup(path);
-		info->name = ft_strdup(read->d_name);
-		push_back(cur, info);
-	}
-	if (closedir(folder) == -1)
-		get_perror(path, 1);
-}
-
-void	show_elem(t_list *l, unsigned int flag)
+void	show_elem(t_list *l, UINT *flag)
 {
    t_elem *pelem = l->first;
    while(pelem)
    {
 		if (pelem->info->name[0] != '.')
    	 		ft_putendl(pelem->info->name);
+		else if (*flag & BYTE_A)
+			ft_putendl(pelem->info->name);
     	 pelem = pelem->next;
    }
 }
@@ -62,14 +46,32 @@ void	show_file(t_list *arg_list, int nb)
 		else
 			tmp = tmp->next;
 	}
-	if (i != nb)
+	if (i != nb && nb != 1)
 		ft_putchar('\n');
 }
 
-void 	fill_arg(unsigned int flag, t_list *l, int nb)
+void	read_folder(t_list *cur, char *path)
 {
+	DIR				*folder;
+	struct	dirent	*read;
+	t_info			*info;
 
+	folder = opendir(path);
+	while ((read = readdir(folder)) != NULL)
+	{
+		info = init_info();
+		info->path = ft_strdup(path);
+		info->name = ft_strdup(read->d_name);
+		push_back(cur, info);
+	}
+	if (closedir(folder) == -1)
+		get_perror(path, 1);
+}
+
+void 	fill_arg(UINT *flag, t_list *l, int nb)
+{
 	t_list			cur;
+	t_list			nav;
 	t_elem			*arg;
 
 	arg = l->first;
@@ -87,6 +89,12 @@ void 	fill_arg(unsigned int flag, t_list *l, int nb)
 		show_elem(&cur, flag);
 		if (arg->next != NULL)
 			ft_putchar('\n');
+		if (*flag & BYTE_R)
+		{
+			nav.first = NULL;
+			nav.last = NULL;
+
+		}
 		free_list(&cur);
 		arg = arg->next;
 	}
@@ -94,17 +102,17 @@ void 	fill_arg(unsigned int flag, t_list *l, int nb)
 
 int 	main(int argc, char **argv)
 {
-	unsigned int 	flag;
-	int				nb;
-	t_list			arg_list;
+	int			nb;
+	UINT 		flag;
+	t_list		arg_list;
 	
 	init(&flag, &arg_list);
 	get_arg(argc, argv, &flag, &arg_list);
-	nb = count_list(arg_list.first);
-	sort_list(arg_list.first, flag);
+	count_list(arg_list.first, &nb);
+	sort_list(arg_list.first, &flag);
 	verif_arg(&arg_list);
 	show_file(&arg_list, nb);
-	fill_arg(flag, &arg_list, nb);
+	fill_arg(&flag, &arg_list, nb);
 	free_list(&arg_list);
 	return(0);
 }
