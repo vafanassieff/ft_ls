@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 14:42:07 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/21 16:28:57 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/21 16:57:36 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,20 @@ void free_list(t_list *l)
    	l->last = NULL;
 }
 
-void	count_list(t_elem *first, int *len)
+int	count_list(t_elem *first, int *len)
 {
 	t_elem *p;
+	int		i;
 
-	len = 0;
+	i = 0;
 	p = first;
 	while (p)
 	{
-		len++;
+		i++;
 		p = p->next;
 	}
+	*len = i;
+	return(i);
 }
 
 void view_list(t_list *l)

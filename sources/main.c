@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/21 16:45:22 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/21 16:57:41 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	show_elem(t_list *l, UINT *flag)
    }
 }
 
-void	show_file(t_list *arg_list, int nb)
+void	show_file(t_list *arg_list, int *nb)
 {
 	t_elem 	*tmp;
 	t_elem	*remove;
@@ -46,7 +46,7 @@ void	show_file(t_list *arg_list, int nb)
 		else
 			tmp = tmp->next;
 	}
-	if (i != nb && nb != 1)
+	if (i != *nb && *nb != 1)
 		ft_putchar('\n');
 }
 
@@ -111,7 +111,7 @@ int 	main(int argc, char **argv)
 	count_list(arg_list.first, &nb);
 	sort_list(arg_list.first, &flag);
 	verif_arg(&arg_list);
-	show_file(&arg_list, nb);
+	show_file(&arg_list, &nb);
 	fill_arg(&flag, &arg_list, nb);
 	free_list(&arg_list);
 	return(0);
