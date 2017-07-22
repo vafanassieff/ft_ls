@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 14:42:07 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/21 16:57:36 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/22 23:52:27 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ void push_back(t_list *l, t_info *info)
 
 void push_front(t_list *l, t_info *info)
 {
-   	t_elem *new;
+   	t_elem 	*new;
+	t_elem	*ptr;
 	
+	ptr	= l->first;
 	new = malloc(sizeof(t_elem));
    	if(!new)
 		exit(EXIT_FAILURE);
 	new->info = info;
 	new->next = l->first;
-   	new->prev = NULL;      
+   	new->prev = NULL;
    	if(l->first)
 		l->first->prev = new;
 	else

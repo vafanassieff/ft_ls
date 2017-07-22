@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 16:14:52 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/21 16:47:17 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/22 23:58:17 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void 	sort_list(t_elem *first, UINT *flag)
 {
 	if (*flag & BYTE_T)
 		printf("sort t");
-	else
+	else if (!(*flag & BYTE_NOSORT))
 		sort_list_ascii(first);
+	else
+		return;
 }

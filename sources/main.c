@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/22 18:46:06 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 00:08:53 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,18 @@ void	recursive(UINT *flag, t_list *l)
 	{
 		cur.first = NULL;
 		cur.last = NULL;
-		if (elem->info->is_dir == 1 && elem->info->name[0] != '.')
+		if (elem->info->is_dir == 1 && ft_strcmp(elem->info->name, "..") != 0 && ft_strcmp(elem->info->name, ".") != 0)
  		{
 			tmp = ft_strjoin(elem->info->path, elem->info->name);
 			read_folder(&cur, tmp);
+			free(tmp);
 			sort_list(cur.first, flag);
-			ft_putstr(cur.first->info->path);
+			tmp = cur.first->info->path;
+			tmp[ft_strlen(tmp)- 1 ] = '\0';
+			ft_putstr(tmp);
 			ft_putendl(":");
 			show_elem(&cur, flag);
-			if (elem->next != NULL)
-				ft_putchar('\n');
-			free(tmp);
+			ft_putchar('\n');
 		}
 		recursive(flag, &cur);
 		free_list(&cur);

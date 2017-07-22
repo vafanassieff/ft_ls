@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/22 18:26:16 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/22 23:59:36 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ BOOL	check_opt(char opt)
 		return (TRUE);
 }
 
-void 	add_arg(UINT *flag, char *arg)
+void 	add_flag(UINT *flag, char *arg)
 {
 	int len;
 	int i;
@@ -42,6 +42,10 @@ void 	add_arg(UINT *flag, char *arg)
 			*flag += BYTE_RS;
 		else if (arg[i] == 't' && !(*flag & BYTE_T))
 			*flag += BYTE_T;
+		else if (arg[i] == 'f' && !(*flag & BYTE_NOSORT))
+			*flag += BYTE_NOSORT;
+		else if (arg[i] == '1' && !(*flag & BYTE_1))
+			*flag += BYTE_1;
 	}
 }
 
@@ -52,10 +56,11 @@ void	get_arg(int argc, char ** argv, UINT *flag, t_list *list)
 	t_info	*info;
 
 	i = 0;
+	test = FALSE;
 	while (++i < argc)
 	{
 		if (argv[i][0] == '-' && argv[i][1])
-			add_arg(flag, argv[i]);
+			add_flag(flag, argv[i]);
 		else
 			break;
 	}
@@ -81,14 +86,14 @@ void	verif_arg(t_list *l)
 {
 	t_elem	*tmp;
 	t_elem	*remove;
-	struct 	stat s;
+	t_stat 	s;
 
 	tmp = l->first;
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->info->path, "") == 0)
 			error_fts_open();
-		else if (stat(tmp->info->path,&s) < 0)
+		else if (lstat(tmp->info->path,&s) < 0)
 		{
 			get_perror(tmp->info->path, 0);
 			remove = tmp;

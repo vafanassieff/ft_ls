@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/22 18:47:00 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/22 23:59:11 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,17 @@
 # define BYTE_A 		((UINT)1 << 2)
 # define BYTE_RS 		((UINT)1 << 3)
 # define BYTE_T			((UINT)1 << 4)
-# define BYTE_NONE		((UINT)1 << 5)
+# define BYTE_NOSORT	((UINT)1 << 5)
+# define BYTE_1			((UINT)1 << 6)
 
-# define OPT_LIST		"Rlart"
+# define OPT_LIST		"Rlartf1"
+
+typedef struct dirent	t_dirent;
+typedef struct stat		t_stat;
+typedef struct winsize	t_winsize;
+typedef struct passwd	t_passwd;
+typedef struct group	t_group;
+typedef struct timespec	t_timespec;
 
 typedef struct 		s_info
 {
@@ -47,7 +55,8 @@ typedef struct 		s_info
 	int				is_dir;
 }					t_info;
 
-typedef struct 		s_elem{
+typedef struct 		s_elem
+{
 	t_info			*info;
 	struct s_elem	*next;
 	struct s_elem	*prev;
@@ -79,6 +88,5 @@ void				verif_arg(t_list *l);
 void 				sort_list(t_elem *first, UINT *flag);
 void				show_elem(t_list *l, UINT *flag);
 void				show_file(t_list *arg_list, int nb);
-void				get_data(char *path, struct	dirent	*read, t_list *cur);
 void				read_folder(t_list *cur, char *path);
 #endif

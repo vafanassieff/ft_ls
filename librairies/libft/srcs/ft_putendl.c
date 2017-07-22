@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 12:28:11 by vafanass          #+#    #+#             */
-/*   Updated: 2016/11/15 15:46:31 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/22 22:37:44 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_putendl(char const *s)
 {
-	ft_putstr(s);
+	if (s)
+		write(1, s, ft_strlen(s));
 	ft_putchar('\n');
 }

@@ -3,3 +3,5 @@
 *.o
 ft_ls
 *.a
+zzz/*
+toto

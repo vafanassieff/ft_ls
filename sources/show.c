@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:13 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/22 18:45:57 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 00:00:10 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	show_elem(t_list *l, UINT *flag)
    {
 		if (pelem->info->name[0] != '.')
    	 		ft_putendl(pelem->info->name);
-		else if (*flag & BYTE_A)
+		else if (*flag & BYTE_A || *flag & BYTE_NOSORT)
 			ft_putendl(pelem->info->name);
     	 pelem = pelem->next;
    }
