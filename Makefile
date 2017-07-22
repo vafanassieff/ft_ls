@@ -28,6 +28,8 @@ SRC =		util.c\
 			error.c\
 			init.c\
 			sort.c\
+			read.c\
+			show.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)

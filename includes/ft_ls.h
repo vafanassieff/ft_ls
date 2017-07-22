@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/21 16:58:40 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/22 18:47:00 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,8 @@ void				init(UINT *flag, t_list *l);
 void				remove_elem(t_elem *elem, t_list *list);
 void				verif_arg(t_list *l);
 void 				sort_list(t_elem *first, UINT *flag);
+void				show_elem(t_list *l, UINT *flag);
+void				show_file(t_list *arg_list, int nb);
+void				get_data(char *path, struct	dirent	*read, t_list *cur);
+void				read_folder(t_list *cur, char *path);
 #endif

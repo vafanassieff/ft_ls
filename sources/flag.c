@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/21 16:47:18 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/22 18:26:16 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	get_arg(int argc, char ** argv, UINT *flag, t_list *list)
 	if (test != TRUE)
 	{
 		info = init_info();
-		info->path = ft_strdup("./");
-		info->name = ft_strdup("./");
+		info->path = ft_strdup(".");
+		info->name = ft_strdup(".");
 		push_back(list, info);
 	}
 }

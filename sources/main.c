@@ -6,77 +6,44 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/22 01:48:39 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/22 18:46:06 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	show_elem(t_list *l, UINT *flag)
-{
-   t_elem *pelem = l->first;
-   while(pelem)
-   {
-		if (pelem->info->name[0] != '.')
-   	 		ft_putendl(pelem->info->name);
-		else if (*flag & BYTE_A)
-			ft_putendl(pelem->info->name);
-    	 pelem = pelem->next;
-   }
-}
-
-void	show_file(t_list *arg_list, int nb)
-{
-	t_elem 	*tmp;
-	t_elem	*remove;
-	int 	i;
-
-	tmp = arg_list->first;
-	i = 0;
-	while (tmp)
-	{
-		if(tmp->info->is_dir == 0)
-		{
-			ft_putendl(tmp->info->name);
-			remove = tmp;
-			tmp = tmp->next;
-			remove_elem(remove, arg_list);
-			i++;
-		}
-		else
-			tmp = tmp->next;
-	}
-	if (i != nb && nb != 1 && i != 0)
-		ft_putchar('\n');
-}
-
-void	read_folder(t_list *cur, char *path)
-{
-	DIR				*folder;
-	struct	dirent	*read;
-	t_info			*info;
-
-	folder = opendir(path);
-	while ((read = readdir(folder)) != NULL)
-	{
-		info = init_info();
-		info->path = ft_strdup(path);
-		info->name = ft_strdup(read->d_name);
-		push_back(cur, info);
-	}
-	if (closedir(folder) == -1)
-		get_perror(path, 1);
-}
-
 void	recursive(UINT *flag, t_list *l)
 {
-	
+	t_elem	*elem;
+	t_list	cur;
+	char 	*tmp;
+
+	elem = l->first;
+	while (elem)
+	{
+		cur.first = NULL;
+		cur.last = NULL;
+		if (elem->info->is_dir == 1 && elem->info->name[0] != '.')
+ 		{
+			tmp = ft_strjoin(elem->info->path, elem->info->name);
+			read_folder(&cur, tmp);
+			sort_list(cur.first, flag);
+			ft_putstr(cur.first->info->path);
+			ft_putendl(":");
+			show_elem(&cur, flag);
+			if (elem->next != NULL)
+				ft_putchar('\n');
+			free(tmp);
+		}
+		recursive(flag, &cur);
+		free_list(&cur);
+		elem = elem->next;
+	}
 }
 
 void 	fill_arg(UINT *flag, t_list *l, int nb)
 {
 	t_list			cur;
-	t_list			nav;
 	t_elem			*arg;
 
 	arg = l->first;
@@ -92,7 +59,7 @@ void 	fill_arg(UINT *flag, t_list *l, int nb)
 		}
 		sort_list(cur.first, flag);
 		show_elem(&cur, flag);
-		if (arg->next != NULL)
+		if (arg->next != NULL || *flag & BYTE_R)
 			ft_putchar('\n');
 		if (*flag & BYTE_R)
 			recursive(flag, &cur);
