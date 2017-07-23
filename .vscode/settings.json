@@ -15,6 +15,7 @@
 		"errno.h": "c",
 		"uuid.h": "c",
 		"dirent.h": "c",
-		"grp.h": "c"
+		"grp.h": "c",
+		"libft.h": "c"
 	}
 }

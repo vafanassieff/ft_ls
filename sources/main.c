@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 02:01:03 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 14:39:33 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,29 @@ void	recursive(UINT *flag, t_list *l)
 	{
 		cur.first = NULL;
 		cur.last = NULL;
-		if (elem->info->is_dir == 1 && ft_strcmp(elem->info->name, "..") != 0 && ft_strcmp(elem->info->name, ".") != 0)
- 		{
-			tmp = ft_strjoin(elem->info->path, elem->info->name);
-			read_folder(&cur, tmp, flag);
-			free(tmp);
-			sort_list(cur.first, flag);
-			tmp = cur.first->info->path;
-			tmp[ft_strlen(tmp)- 1 ] = '\0';
-			ft_putstr(tmp);
-			ft_putendl(":");
-			show_elem(&cur, flag);
-			ft_putchar('\n');
+		if (elem->info->is_dir == 1 && !(*flag & BYTE_A) && ft_strncmp(elem->info->name, ".", 1) == 0)
+			elem = elem->next;
+		else
+		{
+			if (elem->info->is_dir == 1 && ft_strcmp(elem->info->name, "..") != 0 && ft_strcmp(elem->info->name, ".") != 0)
+ 			{
+				tmp = ft_strjoin(elem->info->path, elem->info->name);
+				read_folder(&cur, tmp, flag);
+				free(tmp);
+				sort_list(cur.first, flag);
+				tmp = cur.first->info->path;
+				tmp[ft_strlen(tmp)- 1 ] = '\0';
+				ft_putstr(tmp);
+				ft_putendl(":");
+				show_elem(&cur, flag);
+				ft_putchar('\n');
+				recursive(flag, &cur);
+				free_list(&cur);
+				elem = elem->next;
+			}
+			else
+				elem = elem->next;
 		}
-		recursive(flag, &cur);
-		free_list(&cur);
-		elem = elem->next;
 	}
 }
 
@@ -67,6 +74,7 @@ void 	fill_arg(UINT *flag, t_list *l, int nb)
 			ft_putchar('\n');
 		if (*flag & BYTE_R)
 			recursive(flag, &cur);
+		free_list(&cur);
 		arg = arg->next;
 	}
 }
