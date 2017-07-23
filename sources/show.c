@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:13 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 19:21:58 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 19:58:44 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,22 @@ void		show_elem(t_list *l, UINT *flag)
 		if (pelem->info->name[0] != '.')
 		{
 			if (*flag & BYTE_L)
-				print_format(pelem->info, flag);
+				print_long(pelem->info, flag);
 			else
-				ft_putendl(pelem->info->name);
+				print_format(pelem->info, flag);
 		}
 		else if (*flag & BYTE_A)
 		{
 			if (*flag & BYTE_L)
-				print_format(pelem->info, flag);
+				print_long(pelem->info, flag);
 			else
-				ft_putendl(pelem->info->name);
+				print_format(pelem->info, flag);
 		}
     	 pelem = pelem->next;
    }
 }
 
-void	show_file(t_list *arg_list, int nb)
+void	show_file(t_list *arg_list, int nb, UINT *flag)
 {
 	t_elem 	*tmp;
 	t_elem	*remove;
@@ -71,7 +71,10 @@ void	show_file(t_list *arg_list, int nb)
 	{
 		if(tmp->info->is_dir == 0)
 		{
-			ft_putendl(tmp->info->name);
+			if (*flag & BYTE_L)
+				print_long(tmp->info, flag);
+			else
+				print_format(tmp->info, flag);
 			remove = tmp;
 			tmp = tmp->next;
 			remove_elem(remove, arg_list);

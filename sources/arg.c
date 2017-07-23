@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 16:19:04 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 16:19:41 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 19:57:03 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ void	get_arg(int argc, char ** argv, UINT *flag, t_list *list)
 	}
 	while (i < argc)
 	{
-		info = init_info();
-		info->path = ft_strdup(argv[i]);
-		info->name = ft_strdup(argv[i]);
+		info = get_data(argv[i], argv[i], flag);
 		push_back(list, info);
 		i++;
 		test = TRUE;
@@ -83,9 +81,9 @@ void	verif_arg(t_list *l)
 	{
 		if (ft_strcmp(tmp->info->path, "") == 0)
 			error_fts_open();
-		else if (lstat(tmp->info->path,&s) < 0)
+		else if (lstat(tmp->info->name,&s) < 0)
 		{
-			get_perror(tmp->info->path, 0);
+			get_perror(tmp->info->name, 0);
 			remove = tmp;
 			tmp = tmp->next;
 			remove_elem(remove, l);

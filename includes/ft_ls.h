@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 19:19:23 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 19:47:51 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,13 @@ void		remove_elem(t_elem *elem, t_list *list);
 void		verif_arg(t_list *l);
 void 		sort_list(t_elem *first, UINT *flag);
 void		show_elem(t_list *l, UINT *flag);
-void		show_file(t_list *arg_list, int nb);
+void		show_file(t_list *arg_list, int nb, UINT *flag);
 void		read_folder(t_list *cur, char *path, UINT *flag);
 void		permission_denied(char *path, t_list *cur);
 void		recursive(UINT *flag, t_list *l);
 void 		add_flag(UINT *flag, char *arg);
 void 		fill_arg(UINT *flag, t_list *l, int nb);
-void	print_format(t_info *info, UINT *flag);
+void		print_long(t_info *info, UINT *flag);
+void		print_format(t_info *info, UINT *flag);
+t_info		*get_data(char *path, char *name,UINT *flag);
 #endif

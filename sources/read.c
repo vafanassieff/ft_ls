@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 19:04:30 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 19:54:59 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,18 @@ char	*get_group(t_stat *s)
 	return(tmp->gr_name);
 }
 
-void	get_data(char *path, t_dirent *read, t_list *cur, UINT *flag)
+t_info	*get_data(char *path, char *name,UINT *flag)
 {
 	t_stat 	s;
 	char	*tmp;
 	t_info	*info;
 
 	info = init_info();
-	info->path = ft_strjoin(path, "/");
-	info->name = ft_strdup(read->d_name);
+	if (ft_strcmp(path, name) == 0)
+		info->path = ft_strdup("./");
+	else
+		info->path = ft_strjoin(path, "/");
+	info->name = ft_strdup(name);
 	tmp = ft_strjoin(info->path,  info->name);
 	if (lstat(tmp, &s) < 0)
 		get_perror(info->name, 0);
@@ -97,22 +100,27 @@ void	get_data(char *path, t_dirent *read, t_list *cur, UINT *flag)
 	info->nb_link = (unsigned int)(s.st_nlink);
 	info->block_size = (int)(s.st_blksize);
 	info->nb_block = (int)(s.st_blocks);
-	push_back(cur, info);
 	free(tmp);
+	return(info);
 }
 
 void	read_folder(t_list *cur, char *path, UINT *flag)
 {
 	DIR			*folder;
 	t_dirent	*read;
+	t_info		*info;
 
+	info = NULL;
 	if (!(folder = opendir(path)))
 	{
 		permission_denied(path, cur);
 		return;
 	}
 	while ((read = readdir(folder)) != NULL)
-		get_data(path, read, cur, flag);
+	{
+		info = get_data(path, read->d_name, flag);
+		push_back(cur, info);
+	}
 	if (closedir(folder) == -1)
 		get_perror(path, 1);
 }
