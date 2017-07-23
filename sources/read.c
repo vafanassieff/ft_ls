@@ -6,32 +6,38 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 00:22:44 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 02:00:20 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "ft_ls.h"	
 
-static	void	permission_denied(t_info *info, char *path, t_list *cur)
+void 	remove_point(t_list *l)
 {
-	char *tmp;
+	t_elem	*tmp;
+	t_elem	*remove;
 
-	info = init_info();
-	info->path = ft_strjoin(path, "/");
-	tmp = ft_strdup("ft_ls : ");
-	tmp = ft_strjoin(tmp, ft_strrchr(path, '/') + 1);
-	tmp = ft_strjoin(tmp, ": Permissions denied");
-	info->name = tmp;
-	push_back(cur, info);
+	tmp = l->first;
+	while (tmp)
+	{
+	 	if (tmp->info->name[0] == '.')
+		{
+			remove = tmp;
+			tmp = tmp->next;
+			remove_elem(remove, l);
+		}
+		else
+			tmp = tmp->next;
+	}
 }
 
-void	get_data(char *path, t_dirent *read, t_list *cur, t_info *info)
+void	get_data(char *path, t_dirent *read, t_list *cur, UINT *flag)
 {
 	t_stat 	s;
 	char	*tmp;
-	
-	if (!info)
-		info = init_info();
+	t_info	*info;
+
+	info = init_info();
 	info->path = ft_strjoin(path, "/");
 	info->name = ft_strdup(read->d_name);
 	tmp = ft_strjoin(info->path,  info->name);
@@ -45,20 +51,20 @@ void	get_data(char *path, t_dirent *read, t_list *cur, t_info *info)
 	free(tmp);
 }
 
-void	read_folder(t_list *cur, char *path)
+void	read_folder(t_list *cur, char *path, UINT *flag)
 {
 	DIR			*folder;
 	t_dirent	*read;
-	t_info		*info;
 
-	info = NULL;
 	if (!(folder = opendir(path)))
 	{
-		permission_denied(info, path, cur);
+		permission_denied(path, cur);
 		return;
 	}
 	while ((read = readdir(folder)) != NULL)
-		get_data(path, read, cur, info);
+		get_data(path, read, cur, flag);
 	if (closedir(folder) == -1)
 		get_perror(path, 1);
+	//if (!(*flag & BYTE_A))
+	//	remove_point(cur);
 }

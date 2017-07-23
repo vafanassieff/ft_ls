@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/22 23:59:11 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 01:28:04 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,26 @@ typedef struct		s_list
 	t_elem			*last;
 }					t_list;
 
-void 				printbits(UINT v);
-void				get_arg(int argc, char ** argv, UINT *flag, t_list *list);
-void 				push_back(t_list *l, t_info *info);
-void 				push_front(t_list *l, t_info *info);
-void 				free_list(t_list *l);
-void 				view_list(t_list *l);
-t_info				*init_info();
-void 				error_opt(char opt);
-void				get_perror(char *str, int close);
-void				error_fts_open();
-int					count_list(t_elem *first, int *len);
-void				sort_list_ascii(t_elem *first);
-void				swap_elem_content(t_elem **a, t_elem **b);
-t_info				*init_info();
-void				init(UINT *flag, t_list *l);
-void				remove_elem(t_elem *elem, t_list *list);
-void				verif_arg(t_list *l);
-void 				sort_list(t_elem *first, UINT *flag);
-void				show_elem(t_list *l, UINT *flag);
-void				show_file(t_list *arg_list, int nb);
-void				read_folder(t_list *cur, char *path);
+void 		printbits(UINT v);
+void		get_arg(int argc, char ** argv, UINT *flag, t_list *list);
+void 		push_back(t_list *l, t_info *info);
+void 		push_front(t_list *l, t_info *info);
+void 		free_list(t_list *l);
+void 		view_list(t_list *l);
+t_info		*init_info();
+void 		error_opt(char opt);
+void		get_perror(char *str, int close);
+void		error_fts_open();
+int			count_list(t_elem *first, int *len);
+void		sort_list_ascii(t_elem *first);
+void		swap_elem_content(t_elem **a, t_elem **b);
+t_info		*init_info();
+void		init(UINT *flag, t_list *l);
+void		remove_elem(t_elem *elem, t_list *list);
+void		verif_arg(t_list *l);
+void 		sort_list(t_elem *first, UINT *flag);
+void		show_elem(t_list *l, UINT *flag);
+void		show_file(t_list *arg_list, int nb);
+void		read_folder(t_list *cur, char *path, UINT *flag);
+void		permission_denied(char *path, t_list *cur);
 #endif

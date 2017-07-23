@@ -14,6 +14,7 @@
 		"stat.h": "c",
 		"errno.h": "c",
 		"uuid.h": "c",
-		"dirent.h": "c"
+		"dirent.h": "c",
+		"grp.h": "c"
 	}
 }

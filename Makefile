@@ -1,6 +1,6 @@
 # Compilation
 CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror -g -flto -O3
+CFLAGS =
 ADDFLAGS =	
 
 # Precompiled header

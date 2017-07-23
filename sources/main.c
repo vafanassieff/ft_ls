@@ -6,11 +6,14 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 00:08:53 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 02:01:03 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+//TO DO RA
+
 
 void	recursive(UINT *flag, t_list *l)
 {
@@ -26,7 +29,7 @@ void	recursive(UINT *flag, t_list *l)
 		if (elem->info->is_dir == 1 && ft_strcmp(elem->info->name, "..") != 0 && ft_strcmp(elem->info->name, ".") != 0)
  		{
 			tmp = ft_strjoin(elem->info->path, elem->info->name);
-			read_folder(&cur, tmp);
+			read_folder(&cur, tmp, flag);
 			free(tmp);
 			sort_list(cur.first, flag);
 			tmp = cur.first->info->path;
@@ -52,7 +55,7 @@ void 	fill_arg(UINT *flag, t_list *l, int nb)
 	{
 		cur.first = NULL;
 		cur.last = NULL;
-		read_folder(&cur, arg->info->path);
+		read_folder(&cur, arg->info->path, flag);
 		if (nb > 1)
 		{
 			ft_putstr(arg->info->path);
@@ -64,7 +67,6 @@ void 	fill_arg(UINT *flag, t_list *l, int nb)
 			ft_putchar('\n');
 		if (*flag & BYTE_R)
 			recursive(flag, &cur);
-		free_list(&cur);
 		arg = arg->next;
 	}
 }
