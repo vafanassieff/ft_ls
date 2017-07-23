@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 01:28:04 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 15:54:41 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct 		s_info
 {
 	char			*path;
 	char			*name;
-	int				type;
+	char			type;
 	int				is_dir;
 }					t_info;
 
@@ -90,4 +90,5 @@ void		show_elem(t_list *l, UINT *flag);
 void		show_file(t_list *arg_list, int nb);
 void		read_folder(t_list *cur, char *path, UINT *flag);
 void		permission_denied(char *path, t_list *cur);
+void		recursive(UINT *flag, t_list *l);
 #endif

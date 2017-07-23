@@ -6,29 +6,26 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 02:00:20 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 16:02:37 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"	
 
-void 	remove_point(t_list *l)
+void	get_dir(t_stat *s, int *type)
 {
-	t_elem	*tmp;
-	t_elem	*remove;
+	if (S_ISDIR(s->st_mode))
+		*type = 1;
+	else
+		*type = 0;
+}
 
-	tmp = l->first;
-	while (tmp)
-	{
-	 	if (tmp->info->name[0] == '.')
-		{
-			remove = tmp;
-			tmp = tmp->next;
-			remove_elem(remove, l);
-		}
-		else
-			tmp = tmp->next;
-	}
+void	get_type(t_stat	*s, char *type)
+{
+	if (S_ISDIR(s->st_mode))
+		*type = 'd';
+	else
+		*type = '-';
 }
 
 void	get_data(char *path, t_dirent *read, t_list *cur, UINT *flag)
@@ -43,10 +40,8 @@ void	get_data(char *path, t_dirent *read, t_list *cur, UINT *flag)
 	tmp = ft_strjoin(info->path,  info->name);
 	if (lstat(tmp, &s) < 0)
 		get_perror(info->name, 0);
-	if (S_ISDIR(s.st_mode))
-		info->is_dir = 1;
-	else
-		info->is_dir = 0;
+	get_dir(&s, &info->is_dir);
+	get_type(&s, &info->type);
 	push_back(cur, info);
 	free(tmp);
 }
@@ -65,6 +60,4 @@ void	read_folder(t_list *cur, char *path, UINT *flag)
 		get_data(path, read, cur, flag);
 	if (closedir(folder) == -1)
 		get_perror(path, 1);
-	//if (!(*flag & BYTE_A))
-	//	remove_point(cur);
 }
