@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 15:54:41 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 19:19:23 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,20 @@ typedef struct timespec	t_timespec;
 
 typedef struct 		s_info
 {
+	int				is_dir;
 	char			*path;
 	char			*name;
 	char			type;
-	int				is_dir;
+	char			*mode;
+	char			*owner;
+	char			*group;
+	int				size;
+	int				inode;
+	char			*m_date;
+	long int		m_time;
+	unsigned int	nb_link;
+	int				block_size;
+	int				nb_block;
 }					t_info;
 
 typedef struct 		s_elem
@@ -91,4 +101,7 @@ void		show_file(t_list *arg_list, int nb);
 void		read_folder(t_list *cur, char *path, UINT *flag);
 void		permission_denied(char *path, t_list *cur);
 void		recursive(UINT *flag, t_list *l);
+void 		add_flag(UINT *flag, char *arg);
+void 		fill_arg(UINT *flag, t_list *l, int nb);
+void	print_format(t_info *info, UINT *flag);
 #endif

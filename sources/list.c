@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 14:42:07 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 00:45:19 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 18:47:37 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void free_elem(t_elem *tmp)
 	 	free(tmp->info->path);
 	if(tmp->info->name)
 		free(tmp->info->name);
+	if(tmp->info->mode)
+		free(tmp->info->mode);
 	free(tmp->info);
 	free(tmp);
 }

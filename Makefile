@@ -31,6 +31,8 @@ SRC =		util.c\
 			read.c\
 			show.c\
 			recursive.c\
+			arg.c\
+			print.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)

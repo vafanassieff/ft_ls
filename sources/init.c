@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:51:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/21 16:46:38 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/23 18:39:19 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ t_info	*init_info()
 		exit(0);
 	info->path = NULL;
 	info->name = NULL;
-	info->type = 0;
+	info->mode = NULL;
+	info->owner = NULL;
+	info->group = NULL;
+	info->m_date = NULL;
 	return (info);
 }
 
