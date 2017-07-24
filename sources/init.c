@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:51:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 16:15:17 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 17:05:09 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_info	*init_info()
 	info->nb_link = 0;
 	info->block_size = 0;
 	info->nb_block = 0;
+	info->major = 0;
+	info->minor = 0;
 	return (info);
 }
 

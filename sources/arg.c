@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 16:19:04 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 16:26:25 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 18:02:06 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,24 @@ void	verif_arg(t_list *l)
 			if (S_ISDIR(s.st_mode))
 			{
 				tmp->info->is_dir = 1;
-				if (ft_strcmp(tmp->info->name, ".") != 0 && ft_strcmp(tmp->info->name, "./") != 0)
+				if (ft_strcmp(tmp->info->name, ".") != 0 && ft_strcmp(tmp->info->name, "./") != 0 && tmp->info->name[0] != '/')
 				{
 					join = ft_strjoin(tmp->info->path, tmp->info->name);
 					free(tmp->info->path);
 					tmp->info->path = ft_strdup(join);
 					free(join);
 				}
+				else
+				{
+					free(tmp->info->path);
+					tmp->info->path = ft_strdup(tmp->info->name);
+				}
 			}
 			else
+			{
+				//free_elem(tmp);
 				tmp->info->is_dir = 0;
+			}
 			tmp = tmp->next;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:49:12 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 16:27:23 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 17:39:25 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int 	main(int argc, char **argv)
 	count_list(arg_list.first, &nb);
 	sort_list(arg_list.first, &flag);
 	verif_arg(&arg_list);
+	view_list(&arg_list);
 	show_file(&arg_list, nb, &flag);
 	fill_arg(&flag, &arg_list, nb);
 	free_list(&arg_list);

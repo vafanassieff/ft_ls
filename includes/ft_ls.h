@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 15:16:18 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 18:01:07 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct 		s_info
 	unsigned int	nb_link;
 	int				block_size;
 	int				nb_block;
+	int				major;
+	int				minor;
 }					t_info;
 
 typedef struct 		s_elem
@@ -113,4 +115,5 @@ char		*get_mode(t_stat *s);
 char		*get_owner(t_stat *s);
 char		*get_group(t_stat *s);
 void		get_time(time_t mtime, char **date);
+void free_elem(t_elem *tmp);
 #endif

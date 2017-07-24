@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 16:09:22 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 17:57:46 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ void	get_long_data(t_info *info, UINT *flag, t_stat *s)
 	info->type = get_type(s);
 	if (info->type == 'l')
 		get_link(info, s);
+	if ((info->type == 'b') || (info->type == 'c'))
+	{
+		info->major = (int)major(s->st_rdev);
+		info->minor = (int)minor(s->st_rdev);
+	}
 	info->mode = get_mode(s);
 	info->owner = get_owner(s);
 	info->group = get_group(s);
