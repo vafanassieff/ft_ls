@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 15:03:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 01:28:16 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 16:22:40 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,21 @@ void	permission_denied(char *path, t_list *cur)
 	char	*test;
 	char	*tmp2;
 
-	test = ft_strdup("ft_ls : ");
+	test = ft_strdup("ft_ls: ");
 	info = init_info();
-	info->path = ft_strjoin(path, "/");
+	if (path[ft_strlen(path) - 1] != '/')
+		info->path = ft_strjoin(path, "/");
+	else
+	{
+		path[ft_strlen(path) - 1] = '\0';
+		info->path = ft_strdup(path);
+	}
 	tmp2 = ft_strjoin(test, ft_strrchr(path, '/') + 1);
 	tmp = ft_strjoin(tmp2, ": Permissions denied");
 	info->name = ft_strdup(tmp);
 	free(tmp);
 	free(test);
 	free(tmp2);
+	info->is_dir = -1;
 	push_back(cur, info);
 }

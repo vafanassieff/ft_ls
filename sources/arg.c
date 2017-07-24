@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 16:19:04 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 19:57:03 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 16:19:55 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void 	fill_arg(UINT *flag, t_list *l, int nb)
 	{
 		cur.first = NULL;
 		cur.last = NULL;
-		read_folder(&cur, arg->info->path, flag);
 		if (nb > 1)
 		{
-			ft_putstr(arg->info->path);
+			ft_putstr(arg->info->name);
 			ft_putendl(":");
 		}
+		read_folder(&cur, arg->info->path, flag);
 		sort_list(cur.first, flag);
 		show_elem(&cur, flag);
 		if (arg->next != NULL || *flag & BYTE_R)
@@ -56,7 +56,7 @@ void	get_arg(int argc, char ** argv, UINT *flag, t_list *list)
 	}
 	while (i < argc)
 	{
-		info = get_data(argv[i], argv[i], flag);
+		info = get_data(argv[i], argv[i], flag, 0);
 		push_back(list, info);
 		i++;
 		test = TRUE;
@@ -75,6 +75,7 @@ void	verif_arg(t_list *l)
 	t_elem	*tmp;
 	t_elem	*remove;
 	t_stat 	s;
+	char	*join;
 
 	tmp = l->first;
 	while (tmp)
@@ -91,7 +92,16 @@ void	verif_arg(t_list *l)
 		else
 		{
 			if (S_ISDIR(s.st_mode))
+			{
 				tmp->info->is_dir = 1;
+				if (ft_strcmp(tmp->info->name, ".") != 0 && ft_strcmp(tmp->info->name, "./") != 0)
+				{
+					join = ft_strjoin(tmp->info->path, tmp->info->name);
+					free(tmp->info->path);
+					tmp->info->path = ft_strdup(join);
+					free(join);
+				}
+			}
 			else
 				tmp->info->is_dir = 0;
 			tmp = tmp->next;

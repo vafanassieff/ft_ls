@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:13 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 19:58:44 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 16:17:21 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,18 @@ void		show_total_blocksize(t_list *l, UINT *flag)
 
 void		show_elem(t_list *l, UINT *flag)
 {
-   t_elem *pelem = l->first;
+	t_elem *pelem;
+
+	pelem = l->first;
+	if(pelem->info->is_dir == -1)
+	{
+		ft_putendl(pelem->info->name);
+		return;
+	}
 	if (*flag & BYTE_L)
 		show_total_blocksize(l, flag);
-   while(pelem)
-   {
+	while(pelem)
+   	{
 		if (pelem->info->name[0] != '.')
 		{
 			if (*flag & BYTE_L)

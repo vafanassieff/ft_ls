@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 13:55:18 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 16:09:22 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void	get_long_data(t_info *info, UINT *flag, t_stat *s)
 	info->owner = get_owner(s);
 	info->group = get_group(s);
 	info->size = (int)(s->st_size);
-	info->m_date = ctime(&s->st_mtime);
-	info->m_date[24] = '\0';
+	get_time(s->st_mtime, &info->m_date);
 	info->m_time = s->st_mtime;
 	info->nb_link = (unsigned int)(s->st_nlink);
 	info->block_size = (int)(s->st_blksize);
@@ -56,7 +55,7 @@ void	get_long_data(t_info *info, UINT *flag, t_stat *s)
 		info->inode = (int)(s->st_ino);
 }
 
-t_info	*get_data(char *path, char *name,UINT *flag)
+t_info	*get_data(char *path, char *name,UINT *flag, int code)
 {
 	t_stat 	s;
 	char	*tmp;
@@ -69,7 +68,7 @@ t_info	*get_data(char *path, char *name,UINT *flag)
 		info->path = ft_strjoin(path, "/");
 	info->name = ft_strdup(name);
 	tmp = ft_strjoin(info->path,  info->name);
-	if (lstat(tmp, &s) < 0)
+	if ((lstat(tmp, &s) < 0) && code == 1)
 		get_perror(info->name, 0);
 	info->is_dir = get_dir(&s);
 	if (*flag & BYTE_L)
@@ -92,7 +91,7 @@ void	read_folder(t_list *cur, char *path, UINT *flag)
 	}
 	while ((read = readdir(folder)) != NULL)
 	{
-		info = get_data(path, read->d_name, flag);
+		info = get_data(path, read->d_name, flag, 1);
 		push_back(cur, info);
 	}
 	if (closedir(folder) == -1)

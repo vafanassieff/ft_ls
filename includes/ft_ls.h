@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 13:35:04 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 15:16:18 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,11 @@ void 		add_flag(UINT *flag, char *arg);
 void 		fill_arg(UINT *flag, t_list *l, int nb);
 void		print_long(t_info *info, UINT *flag);
 void		print_format(t_info *info, UINT *flag);
-t_info		*get_data(char *path, char *name,UINT *flag);
+t_info		*get_data(char *path, char *name,UINT *flag, int code);
 int			get_dir(t_stat *s);
 char		get_type(t_stat	*s);
 char		*get_mode(t_stat *s);
 char		*get_owner(t_stat *s);
 char		*get_group(t_stat *s);
+void		get_time(time_t mtime, char **date);
 #endif
