@@ -1,6 +1,6 @@
 # Compilation
 CC =		gcc
-CFLAGS =
+CFLAGS = -Werror -Wextra -Wall
 ADDFLAGS =	
 
 # Precompiled header
@@ -33,6 +33,7 @@ SRC =		util.c\
 			recursive.c\
 			arg.c\
 			print.c\
+			get.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)

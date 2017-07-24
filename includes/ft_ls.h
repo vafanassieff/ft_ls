@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 19:47:51 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 13:35:04 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define BYTE_T			((UINT)1 << 4)
 # define BYTE_NOSORT	((UINT)1 << 5)
 # define BYTE_1			((UINT)1 << 6)
+# define BYTE_I			((UINT)1 << 7)
 
 # define OPT_LIST		"Rlartf1"
 
@@ -106,4 +107,9 @@ void 		fill_arg(UINT *flag, t_list *l, int nb);
 void		print_long(t_info *info, UINT *flag);
 void		print_format(t_info *info, UINT *flag);
 t_info		*get_data(char *path, char *name,UINT *flag);
+int			get_dir(t_stat *s);
+char		get_type(t_stat	*s);
+char		*get_mode(t_stat *s);
+char		*get_owner(t_stat *s);
+char		*get_group(t_stat *s);
 #endif

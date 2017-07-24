@@ -6,70 +6,54 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 19:54:59 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 13:55:18 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"	
+#include "ft_ls.h"
 
-int		get_dir(t_stat *s)
+void	get_link(t_info *info, t_stat *s)
 {
-	if (S_ISDIR(s->st_mode))
-		return(1);
-	else
-		return(0);
+	ssize_t	r;
+	char 	*tmp;
+	char	*tmp_name;
+
+	tmp = ft_strjoin(info->path, info->name);
+	tmp_name = ft_strdup(info->name);
+	free(info->name);
+	info->name = malloc(sizeof(char *) * (s->st_size + 1));
+	if (info->name == NULL)
+		exit(1);
+	r = readlink(tmp, info->name, s->st_size);
+	if (r == -1)
+		get_perror("", 1);
+	free(tmp);
+	tmp = ft_strjoin(tmp_name, " -> ");
+	free(tmp_name);
+	tmp_name = ft_strdup(info->name);
+	free(info->name);
+	info->name = ft_strjoin(tmp, tmp_name);
+	free(tmp);
+	free(tmp_name);
 }
 
-char	get_type(t_stat	*s)
+void	get_long_data(t_info *info, UINT *flag, t_stat *s)
 {
-	if (S_ISDIR(s->st_mode))
-		return('d');
-	else if (S_ISLNK(s->st_mode))
-		return('l');
-	else if (S_ISCHR(s->st_mode))
-		return('c');
-	else if (S_ISBLK(s->st_mode))
-		return('b');
-	else if (S_ISFIFO(s->st_mode))
-		return('p');
-	else if (S_ISSOCK(s->st_mode))
-		return('s');
-	else
-		return('-');
-}
-
-char	*get_mode(t_stat *s)
-{
-	char	*mode;
-
-	mode = ft_strnew(10);
-	mode[0] = (s->st_mode & S_IRUSR) ? 'r' : '-';
-    mode[1] = (s->st_mode & S_IWUSR) ? 'w' : '-';
-    mode[2] = (s->st_mode & S_IXUSR) ? 'x' : '-';
-    mode[3] = (s->st_mode & S_IRGRP) ? 'r' : '-';
-    mode[4] = (s->st_mode & S_IWGRP) ? 'w' : '-';
-    mode[5] = (s->st_mode & S_IXGRP) ? 'x' : '-';
-    mode[6] = (s->st_mode & S_IROTH) ? 'r' : '-';
-    mode[7] = (s->st_mode & S_IWOTH) ? 'w' : '-';
-    mode[8] = (s->st_mode & S_IXOTH) ? 'x' : '-';
-	mode[9] = '\0';
-	return (mode);
-}
-
-char	*get_owner(t_stat *s)
-{
-	t_passwd	*tmp;
-
-	tmp = getpwuid(s->st_uid);
-	return(tmp->pw_name);
-}
-
-char	*get_group(t_stat *s)
-{
-	t_group 	*tmp;
-
-	tmp = getgrgid(s->st_gid);
-	return(tmp->gr_name);
+	info->type = get_type(s);
+	if (info->type == 'l')
+		get_link(info, s);
+	info->mode = get_mode(s);
+	info->owner = get_owner(s);
+	info->group = get_group(s);
+	info->size = (int)(s->st_size);
+	info->m_date = ctime(&s->st_mtime);
+	info->m_date[24] = '\0';
+	info->m_time = s->st_mtime;
+	info->nb_link = (unsigned int)(s->st_nlink);
+	info->block_size = (int)(s->st_blksize);
+	info->nb_block = (int)(s->st_blocks);
+	if (*flag &BYTE_I)
+		info->inode = (int)(s->st_ino);
 }
 
 t_info	*get_data(char *path, char *name,UINT *flag)
@@ -88,18 +72,8 @@ t_info	*get_data(char *path, char *name,UINT *flag)
 	if (lstat(tmp, &s) < 0)
 		get_perror(info->name, 0);
 	info->is_dir = get_dir(&s);
-	info->type = get_type(&s);
-	info->mode = get_mode(&s);
-	info->owner = get_owner(&s);
-	info->group = get_group(&s);
-	info->size = (int)(s.st_size);
-	info->inode = (int)(s.st_ino);
-	info->m_date = ctime(&s.st_mtime);
-	info->m_date[24] = '\0';
-	info->m_time = s.st_mtime;
-	info->nb_link = (unsigned int)(s.st_nlink);
-	info->block_size = (int)(s.st_blksize);
-	info->nb_block = (int)(s.st_blocks);
+	if (*flag & BYTE_L)
+		get_long_data(info, flag, &s);
 	free(tmp);
 	return(info);
 }
