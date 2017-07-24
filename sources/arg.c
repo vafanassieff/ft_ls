@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 16:19:04 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 16:19:55 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/24 16:26:25 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	verif_arg(t_list *l)
 	tmp = l->first;
 	while (tmp)
 	{
-		if (ft_strcmp(tmp->info->path, "") == 0)
+		if (ft_strcmp(tmp->info->name, "") == 0)
 			error_fts_open();
 		else if (lstat(tmp->info->name,&s) < 0)
 		{
