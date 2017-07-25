@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:02:50 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 15:17:25 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 01:22:57 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@ static char 	*six_month(char *tmp)
 	char 	*year;
 	char	*tmpbis;
 	char 	*tmpter;
+	char	*toto;
 
 	tmp[24] = '\0';
+	toto = " ";
 	year = ft_strsub(tmp, 20, 4);
 	tmp = ft_strsub(tmp, 4, 20);
 	tmpbis = ft_strsub(tmp, 0, 7);
-	tmpter = ft_strjoin(tmpbis, year);
+	tmpter = ft_strjoin(tmpbis, toto);
+	free(tmpbis);
+	tmpbis = ft_strjoin(tmpter, year);
 	free(tmp);
 	free(year);
-	free(tmpbis);
-	return (tmpter);
+	return (tmpbis);
 }
 
 static char	*time_noflag(char *tmp)
