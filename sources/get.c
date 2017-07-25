@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 13:29:02 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 15:02:40 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 15:08:43 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,6 @@ char	get_type(t_stat	*s)
 		return('s');
 	else
 		return('-');
-}
-
-char	*get_mode(t_stat *s)
-{
-	char	*mode;
-
-	mode = ft_strnew(10);
-	mode[0] = (s->st_mode & S_IRUSR) ? 'r' : '-';
-    mode[1] = (s->st_mode & S_IWUSR) ? 'w' : '-';
-    mode[2] = (s->st_mode & S_IXUSR) ? 'x' : '-';
-    mode[3] = (s->st_mode & S_IRGRP) ? 'r' : '-';
-    mode[4] = (s->st_mode & S_IWGRP) ? 'w' : '-';
-    mode[5] = (s->st_mode & S_IXGRP) ? 'x' : '-';
-    mode[6] = (s->st_mode & S_IROTH) ? 'r' : '-';
-    mode[7] = (s->st_mode & S_IWOTH) ? 'w' : '-';
-    mode[8] = (s->st_mode & S_IXOTH) ? 'x' : '-';
-	mode[9] = '\0';
-	return (mode);
 }
 
 char	*get_owner(t_stat *s)

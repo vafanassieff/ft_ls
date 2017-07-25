@@ -6,13 +6,13 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:02:50 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 15:03:02 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 15:17:25 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char 	*six_month(char *tmp)
+static char 	*six_month(char *tmp)
 {
 	char 	*year;
 	char	*tmpbis;
@@ -29,7 +29,7 @@ char 	*six_month(char *tmp)
 	return (tmpter);
 }
 
-char	*time_noflag(char *tmp)
+static char	*time_noflag(char *tmp)
 {
 	char	*tmpbis;
 
