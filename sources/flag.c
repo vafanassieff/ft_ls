@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/23 16:19:37 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 15:04:15 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void 	add_flag(UINT *flag, char *arg)
 
 	len = ft_strlen(arg);
 	i = 0;
-	
 	while (i++ < len)
 	{
 		if (check_opt(arg[i]) == FALSE)
@@ -49,5 +48,7 @@ void 	add_flag(UINT *flag, char *arg)
 		}
 		else if (arg[i] == '1' && !(*flag & BYTE_1))
 			*flag += BYTE_1;
+		else if (arg[i] == 'T' && !(*flag & BYTE_BT))
+			*flag += BYTE_BT;
 	}
 }

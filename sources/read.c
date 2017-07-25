@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 13:33:07 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 14:50:00 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	get_long_data(t_info *info, UINT *flag, t_stat *s)
 	info->owner = get_owner(s);
 	info->group = get_group(s);
 	info->size = (int)(s->st_size);
-	get_time(s->st_mtime, &info->m_date);
+	get_time(s->st_mtime, &info->m_date, flag);
 	info->m_time = s->st_mtime;
 	info->nb_link = (unsigned int)(s->st_nlink);
 	info->block_size = (int)(s->st_blksize);

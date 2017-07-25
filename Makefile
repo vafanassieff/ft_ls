@@ -34,6 +34,7 @@ SRC =		util.c\
 			arg.c\
 			print.c\
 			get.c\
+			get_time.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)

@@ -6,27 +6,11 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 13:29:02 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 15:41:56 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 15:02:40 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void	get_time(time_t mtime, char **date)
-{
-	char	*tmp;
-	char 	*tmpbis;
-	time_t	t;
-
-	t = time(0);
-	tmp = ctime(&mtime);
-	tmp[24] = '\0';
-	tmp = ft_strsub(tmp, 4, 20);
-	tmpbis = ft_strsub(tmp, 0, 12);
-	*date = ft_strdup(tmpbis);
-	free(tmp);
-	free(tmpbis);
-}
 
 int		get_dir(t_stat *s)
 {

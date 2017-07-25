@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 18:01:07 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 14:53:15 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@
 # define BYTE_NOSORT	((UINT)1 << 5)
 # define BYTE_1			((UINT)1 << 6)
 # define BYTE_I			((UINT)1 << 7)
+# define BYTE_BT		((UINT)1 << 8)
 
-# define OPT_LIST		"Rlartf1"
+# define OPT_LIST		"Rlartf1T"
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
@@ -114,6 +115,6 @@ char		get_type(t_stat	*s);
 char		*get_mode(t_stat *s);
 char		*get_owner(t_stat *s);
 char		*get_group(t_stat *s);
-void		get_time(time_t mtime, char **date);
+void		get_time(time_t mtime, char **date, UINT *flag);
 void free_elem(t_elem *tmp);
 #endif
