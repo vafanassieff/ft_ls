@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 16:19:04 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 13:45:49 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 15:49:06 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,12 @@ void	get_arg(int argc, char ** argv, UINT *flag, t_list *list)
 	}
 	if (test != TRUE)
 	{
-		info = init_info();
-		info->path = ft_strdup(".");
-		info->name = ft_strdup(".");
+		info = get_data(".", ".", flag, 0);
 		push_back(list, info);
 	}
 }
 
-void	verif_arg(t_list *l)
+void	verif_arg(t_list *l, UINT *flag)
 {
 	t_elem	*tmp;
 	t_elem	*remove;
@@ -91,7 +89,7 @@ void	verif_arg(t_list *l)
 		}
 		else
 		{
-			if (S_ISDIR(s.st_mode))
+			if (S_ISDIR(s.st_mode) && !(*flag & BYTE_D))
 			{
 				tmp->info->is_dir = 1;
 				if (ft_strcmp(tmp->info->name, ".") != 0 && ft_strcmp(tmp->info->name, "./") != 0 && tmp->info->name[0] != '/')
@@ -108,10 +106,7 @@ void	verif_arg(t_list *l)
 				}
 			}
 			else
-			{
-				//free_elem(tmp);
 				tmp->info->is_dir = 0;
-			}
 			tmp = tmp->next;
 		}
 	}

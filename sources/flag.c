@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 15:04:15 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 15:31:49 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void 	add_flag(UINT *flag, char *arg)
 			*flag += BYTE_1;
 		else if (arg[i] == 'T' && !(*flag & BYTE_BT))
 			*flag += BYTE_BT;
+		else if (arg[i] == 'd' && !(*flag & BYTE_D))
+			*flag += BYTE_D;
 	}
 }

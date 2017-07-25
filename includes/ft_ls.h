@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 14:53:15 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 15:32:41 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@
 # define BYTE_1			((UINT)1 << 6)
 # define BYTE_I			((UINT)1 << 7)
 # define BYTE_BT		((UINT)1 << 8)
+# define BYTE_D			((UINT)1 << 9)
 
-# define OPT_LIST		"Rlartf1T"
+# define OPT_LIST		"Rlartf1Td"
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
@@ -98,7 +99,7 @@ void		swap_elem_content(t_elem **a, t_elem **b);
 t_info		*init_info();
 void		init(UINT *flag, t_list *l);
 void		remove_elem(t_elem *elem, t_list *list);
-void		verif_arg(t_list *l);
+void		verif_arg(t_list *l, UINT *flag);
 void 		sort_list(t_elem *first, UINT *flag);
 void		show_elem(t_list *l, UINT *flag);
 void		show_file(t_list *arg_list, int nb, UINT *flag);
@@ -116,5 +117,5 @@ char		*get_mode(t_stat *s);
 char		*get_owner(t_stat *s);
 char		*get_group(t_stat *s);
 void		get_time(time_t mtime, char **date, UINT *flag);
-void free_elem(t_elem *tmp);
+void 		free_elem(t_elem *tmp);
 #endif
