@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 17:57:46 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 13:33:07 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,17 @@ t_info	*get_data(char *path, char *name,UINT *flag, int code)
 	t_info	*info;
 
 	info = init_info();
+	info->name = ft_strdup(name);
+	if (name[0] == '/')
+		tmp = ft_strdup(name);
+	else
+	{
 	if (ft_strcmp(path, name) == 0)
 		info->path = ft_strdup("./");
 	else
 		info->path = ft_strjoin(path, "/");
-	info->name = ft_strdup(name);
 	tmp = ft_strjoin(info->path,  info->name);
+	}
 	if ((lstat(tmp, &s) < 0) && code == 1)
 		get_perror(info->name, 0);
 	info->is_dir = get_dir(&s);

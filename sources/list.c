@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 14:42:07 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 14:55:48 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 13:47:25 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void free_list(t_list *l)
   	while(pelem)
   	{
   	   	tmp = pelem;
-		free_elem(tmp);
     	pelem = pelem->next;
+		free_elem(tmp);
   	}
 	l->first = NULL;
    	l->last = NULL;
