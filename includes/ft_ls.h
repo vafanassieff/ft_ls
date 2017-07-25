@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 16:38:07 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 17:03:31 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ char		*get_group(t_stat *s);
 void		get_time(time_t mtime, char **date, UINT *flag);
 void 		free_elem(t_elem *tmp);
 void		init_padding(t_padding *p);
-void	get_padding(t_padding *p, t_list *l, UINT *flag);
+void		get_padding(t_padding *p, t_list *l, UINT *flag);
+int 		get_int_len (int x);
 #endif
