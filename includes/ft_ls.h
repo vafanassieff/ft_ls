@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 15:32:41 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 16:38:07 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ typedef struct winsize	t_winsize;
 typedef struct passwd	t_passwd;
 typedef struct group	t_group;
 typedef struct timespec	t_timespec;
+
+typedef	struct		s_padding
+{
+	int				link;
+	int				user;
+	int				group;
+	int				size;
+}					t_padding;
 
 typedef struct 		s_info
 {
@@ -108,8 +116,8 @@ void		permission_denied(char *path, t_list *cur);
 void		recursive(UINT *flag, t_list *l);
 void 		add_flag(UINT *flag, char *arg);
 void 		fill_arg(UINT *flag, t_list *l, int nb);
-void		print_long(t_info *info, UINT *flag);
-void		print_format(t_info *info, UINT *flag);
+void		print_long(t_info *info, UINT *flag, t_padding *p);
+void		print_format(t_info *info, UINT *flag, t_padding *p);
 t_info		*get_data(char *path, char *name,UINT *flag, int code);
 int			get_dir(t_stat *s);
 char		get_type(t_stat	*s);
@@ -118,4 +126,6 @@ char		*get_owner(t_stat *s);
 char		*get_group(t_stat *s);
 void		get_time(time_t mtime, char **date, UINT *flag);
 void 		free_elem(t_elem *tmp);
+void		init_padding(t_padding *p);
+void	get_padding(t_padding *p, t_list *l, UINT *flag);
 #endif

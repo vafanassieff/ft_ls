@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 15:45:44 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 15:55:08 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	get_long_data(t_info *info, UINT *flag, t_stat *s)
 		info->major = (int)major(s->st_rdev);
 		info->minor = (int)minor(s->st_rdev);
 	}
+	if (*flag &BYTE_I)
+		info->inode = (int)(s->st_ino);
 	info->mode = get_mode(s);
 	info->owner = get_owner(s);
 	info->group = get_group(s);
@@ -56,8 +58,6 @@ void	get_long_data(t_info *info, UINT *flag, t_stat *s)
 	info->nb_link = (unsigned int)(s->st_nlink);
 	info->block_size = (int)(s->st_blksize);
 	info->nb_block = (int)(s->st_blocks);
-	if (*flag &BYTE_I)
-		info->inode = (int)(s->st_ino);
 }
 
 t_info	*get_data(char *path, char *name,UINT *flag, int code)
@@ -81,8 +81,7 @@ t_info	*get_data(char *path, char *name,UINT *flag, int code)
 	if ((lstat(tmp, &s) < 0) && code == 1)
 		get_perror(info->name, 0);
 	info->is_dir = get_dir(&s);
-	if (*flag & BYTE_L)
-		get_long_data(info, flag, &s);
+	get_long_data(info, flag, &s);
 	free(tmp);
 	return(info);
 }

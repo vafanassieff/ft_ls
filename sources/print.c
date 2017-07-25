@@ -6,14 +6,16 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 16:47:48 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 16:04:36 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 16:46:37 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	print_long(t_info *info, UINT *flag)
+void	print_long(t_info *info, UINT *flag, t_padding *p)
 {
+	printf("link = %d | user = %d | group %d | size = %d\n", p->link, p->user, p->group, p->size);
+
 	if (*flag & BYTE_I)
 		ft_putstr("toto");
 	ft_putchar(info->type);
@@ -32,8 +34,9 @@ void	print_long(t_info *info, UINT *flag)
 	ft_putendl(info->name);
 }
 
-void	print_format(t_info *info, UINT *flag)
+void	print_format(t_info *info, UINT *flag, t_padding *p)
 {
+	p->link = 0;
 	if (*flag & BYTE_I)
 		ft_putstr("toto");
 	ft_putendl(info->name);

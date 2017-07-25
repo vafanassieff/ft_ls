@@ -36,6 +36,7 @@ SRC =		util.c\
 			get.c\
 			get_time.c\
 			get_mode.c\
+			get_padding.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)

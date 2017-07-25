@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:51:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 17:05:09 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 16:33:06 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ t_info	*init_info()
 	info->major = 0;
 	info->minor = 0;
 	return (info);
+}
+
+void	init_padding(t_padding *p)
+{
+	p->link = 0;
+	p->user = 0;
+	p->group = 0;
+	p->size = 0;
 }
 
 void	init(UINT *flag, t_list *l)

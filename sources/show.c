@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:13 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 16:17:21 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 16:38:47 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void		show_total_blocksize(t_list *l, UINT *flag)
 
 void		show_elem(t_list *l, UINT *flag)
 {
-	t_elem *pelem;
+	t_elem 		*pelem;
+	t_padding	p;
 
 	pelem = l->first;
 	if(pelem->info->is_dir == -1)
@@ -46,21 +47,22 @@ void		show_elem(t_list *l, UINT *flag)
 	}
 	if (*flag & BYTE_L)
 		show_total_blocksize(l, flag);
+	get_padding(&p, l, flag);
 	while(pelem)
    	{
 		if (pelem->info->name[0] != '.')
 		{
 			if (*flag & BYTE_L)
-				print_long(pelem->info, flag);
+				print_long(pelem->info, flag, &p);
 			else
-				print_format(pelem->info, flag);
+				print_format(pelem->info, flag, &p);
 		}
 		else if (*flag & BYTE_A)
 		{
 			if (*flag & BYTE_L)
-				print_long(pelem->info, flag);
+				print_long(pelem->info, flag, &p);
 			else
-				print_format(pelem->info, flag);
+				print_format(pelem->info, flag, &p);
 		}
     	 pelem = pelem->next;
    }
@@ -71,17 +73,19 @@ void	show_file(t_list *arg_list, int nb, UINT *flag)
 	t_elem 	*tmp;
 	t_elem	*remove;
 	int 	i;
+	t_padding	p;
 
 	tmp = arg_list->first;
 	i = 0;
+	get_padding(&p, arg_list, flag);
 	while (tmp)
 	{
 		if(tmp->info->is_dir == 0)
 		{
 			if (*flag & BYTE_L)
-				print_long(tmp->info, flag);
+				print_long(tmp->info, flag, &p);
 			else
-				print_format(tmp->info, flag);
+				print_format(tmp->info, flag, &p);
 			remove = tmp;
 			tmp = tmp->next;
 			remove_elem(remove, arg_list);
