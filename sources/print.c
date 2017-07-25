@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 16:47:48 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 17:35:58 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 17:56:58 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,16 @@ void	ft_put_whitespace(int nb)
 void	print_long(t_info *info, UINT *flag, t_padding *p)
 {
 	if (*flag & BYTE_I)
-		ft_putstr("toto");
+	{
+		ft_put_whitespace(p->inode - get_int_len(info->inode));
+		ft_putnbr(info->inode);
+		ft_put_whitespace(1);
+	}
 	ft_putchar(info->type);
 	ft_putstr(info->mode);
 	ft_put_whitespace(p->link - get_int_len(info->nb_link) + 2);
 	ft_putnbr(info->nb_link);
-	ft_put_whitespace(p->user - (int)ft_strlen(info->owner) + 2);
+	ft_put_whitespace(p->user - (int)ft_strlen(info->owner) + 1);
 	ft_putstr(info->owner);
 	ft_put_whitespace(p->group - (int)ft_strlen(info->group) + 2);
 	ft_putstr(info->group);

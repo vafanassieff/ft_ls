@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 15:55:08 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 17:42:23 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	get_long_data(t_info *info, UINT *flag, t_stat *s)
 		info->major = (int)major(s->st_rdev);
 		info->minor = (int)minor(s->st_rdev);
 	}
-	if (*flag &BYTE_I)
+	if (*flag & BYTE_I)
 		info->inode = (int)(s->st_ino);
 	info->mode = get_mode(s);
 	info->owner = get_owner(s);

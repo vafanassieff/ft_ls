@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:51:35 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 17:03:31 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 17:41:54 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define BYTE_BT		((UINT)1 << 8)
 # define BYTE_D			((UINT)1 << 9)
 
-# define OPT_LIST		"Rlartf1Td"
+# define OPT_LIST		"Rlartf1Tdi"
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
@@ -56,6 +56,7 @@ typedef	struct		s_padding
 	int				user;
 	int				group;
 	int				size;
+	int				inode;
 }					t_padding;
 
 typedef struct 		s_info

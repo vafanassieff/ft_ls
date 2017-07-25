@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:13 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 17:32:30 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/25 17:54:17 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void		show_elem(t_list *l, UINT *flag)
 	if (*flag & BYTE_L)
 		show_total_blocksize(l, flag);
 	get_padding(&p, l, flag);
-	//printf("link = %d | user = %d | group %d | size = %d\n", p.link, p.user, p.group, p.size);
 	while(pelem)
    	{
 		if (pelem->info->name[0] != '.')
