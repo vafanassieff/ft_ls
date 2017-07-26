@@ -6,16 +6,16 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/26 14:49:22 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 17:50:07 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	get_link(t_info *info, t_stat *s)
+void		get_link(t_info *info, struct stat *s)
 {
 	ssize_t	r;
-	char 	*tmp;
+	char	*tmp;
 	char	*tmp_name;
 
 	tmp = ft_strjoin(info->path, info->name);
@@ -38,7 +38,7 @@ void	get_link(t_info *info, t_stat *s)
 	free(tmp_name);
 }
 
-void	get_long_data(t_info *info, UINT *flag, t_stat *s)
+void		get_long_data(t_info *info, UINT *flag, struct stat *s)
 {
 	info->type = get_type(s);
 	if (info->type == 'l' && *flag & BYTE_L)
@@ -61,11 +61,11 @@ void	get_long_data(t_info *info, UINT *flag, t_stat *s)
 	info->nb_block = (int)(s->st_blocks);
 }
 
-t_info	*get_data(char *path, char *name,UINT *flag, int code)
+t_info		*get_data(char *path, char *name, UINT *flag, int code)
 {
-	t_stat 	s;
-	char	*tmp;
-	t_info	*info;
+	struct stat	s;
+	char		*tmp;
+	t_info		*info;
 
 	info = init_info();
 	info->name = ft_strdup(name);
@@ -73,31 +73,31 @@ t_info	*get_data(char *path, char *name,UINT *flag, int code)
 		tmp = ft_strdup(name);
 	else
 	{
-	if (ft_strcmp(path, name) == 0)
-		info->path = ft_strdup("./");
-	else
-		info->path = ft_strjoin(path, "/");
-	tmp = ft_strjoin(info->path,  info->name);
+		if (ft_strcmp(path, name) == 0)
+			info->path = ft_strdup("./");
+		else
+			info->path = ft_strjoin(path, "/");
+		tmp = ft_strjoin(info->path, info->name);
 	}
 	if ((lstat(tmp, &s) < 0) && code == 1)
 		get_perror(info->name, 0);
 	info->is_dir = get_dir(&s);
 	get_long_data(info, flag, &s);
 	free(tmp);
-	return(info);
+	return (info);
 }
 
-void	read_folder(t_list *cur, char *path, UINT *flag)
+void		read_folder(t_list *cur, char *path, UINT *flag)
 {
-	DIR			*folder;
-	t_dirent	*read;
-	t_info		*info;
+	DIR				*folder;
+	struct dirent	*read;
+	t_info			*info;
 
 	info = NULL;
 	if (!(folder = opendir(path)))
 	{
 		permission_denied(path, cur);
-		return;
+		return ;
 	}
 	while ((read = readdir(folder)) != NULL)
 	{

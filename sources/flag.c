@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 16:36:22 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 17:39:10 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 16:04:51 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,26 @@ BOOL	check_opt(char opt)
 		return (TRUE);
 }
 
-void 	add_flag(UINT *flag, char *arg)
+void	flag_next(UINT *flag, char *arg, int i)
+{
+	if (arg[i] == 'f' && !(*flag & BYTE_NOSORT) && !(*flag & BYTE_A))
+	{
+		*flag += BYTE_NOSORT;
+		*flag += BYTE_A;
+	}
+	else if (arg[i] == '1' && !(*flag & BYTE_1))
+		*flag += BYTE_1;
+	else if (arg[i] == 'T' && !(*flag & BYTE_BT))
+		*flag += BYTE_BT;
+	else if (arg[i] == 'd' && !(*flag & BYTE_D))
+		*flag += BYTE_D;
+	else if (arg[i] == 'i' && !(*flag & BYTE_I))
+		*flag += BYTE_I;
+	else if (arg[i] == 'S' && !(*flag & BYTE_S))
+		*flag += BYTE_S;
+}
+
+void	add_flag(UINT *flag, char *arg)
 {
 	int len;
 	int i;
@@ -41,18 +60,7 @@ void 	add_flag(UINT *flag, char *arg)
 			*flag += BYTE_RS;
 		else if (arg[i] == 't' && !(*flag & BYTE_T))
 			*flag += BYTE_T;
-		else if (arg[i] == 'f' && !(*flag & BYTE_NOSORT) && !(*flag & BYTE_A))
-		{
-			*flag += BYTE_NOSORT;
-			*flag += BYTE_A;
-		}
-		else if (arg[i] == '1' && !(*flag & BYTE_1))
-			*flag += BYTE_1;
-		else if (arg[i] == 'T' && !(*flag & BYTE_BT))
-			*flag += BYTE_BT;
-		else if (arg[i] == 'd' && !(*flag & BYTE_D))
-			*flag += BYTE_D;
-		else if (arg[i] == 'i' && !(*flag & BYTE_I))
-			*flag += BYTE_I;
+		else
+			flag_next(flag, arg, i);
 	}
 }

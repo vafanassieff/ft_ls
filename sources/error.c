@@ -6,13 +6,13 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 15:03:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/26 14:47:51 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 16:04:22 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void 	error_opt(char opt)
+void	error_opt(char opt)
 {
 	ft_putstr_fd("ls: illegal option -- ", 2);
 	ft_putchar_fd(opt, 2);
@@ -26,15 +26,15 @@ void 	error_opt(char opt)
 
 void	get_perror(char *str, int close)
 {
-		ft_putstr_fd("ft_ls: ", 2);
-		ft_putstr_fd(str, 2);
-		ft_putstr_fd(": ", 2);
-		perror("");
-		if (close == TRUE)
-			exit(1);
+	ft_putstr_fd("ft_ls: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": ", 2);
+	perror("");
+	if (close == TRUE)
+		exit(1);
 }
 
-void	error_fts_open()
+void	error_fts_open(void)
 {
 	ft_putendl_fd("ft_ls: fts_open: No such file or directory", 2);
 	exit(1);
@@ -43,7 +43,7 @@ void	error_fts_open()
 void	permission_denied(char *path, t_list *cur)
 {
 	t_info	*info;
-	char 	*tmp;
+	char	*tmp;
 	char	*test;
 	char	*tmp2;
 

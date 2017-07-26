@@ -16,6 +16,8 @@
 		"uuid.h": "c",
 		"dirent.h": "c",
 		"grp.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"ttycom.h": "c",
+		"termios.h": "c"
 	}
 }

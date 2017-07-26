@@ -6,17 +6,17 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:02:50 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/26 12:31:43 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 16:09:26 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static char 	*six_month(char *tmp)
+static char	*six_month(char *tmp)
 {
-	char 	*year;
+	char	*year;
 	char	*tmpbis;
-	char 	*tmpter;
+	char	*tmpter;
 	char	*toto;
 
 	tmp[24] = '\0';
@@ -41,10 +41,10 @@ static char	*time_noflag(char *tmp)
 	tmp = ft_strsub(tmp, 4, 20);
 	tmpbis = ft_strsub(tmp, 0, 12);
 	free(tmp);
-	return(tmpbis);
+	return (tmpbis);
 }
 
-void	get_time(time_t mtime, char **date, UINT *flag)
+void		get_time(time_t mtime, char **date, UINT *flag)
 {
 	char	*tmp;
 	time_t	current;
@@ -58,7 +58,7 @@ void	get_time(time_t mtime, char **date, UINT *flag)
 	else
 	{
 		current = time(0);
-		if (mtime > current +  15638400 || current - mtime > 15638400)
+		if (mtime > current + 15638400 || current - mtime > 15638400)
 			*date = six_month(tmp);
 		else
 			*date = time_noflag(tmp);

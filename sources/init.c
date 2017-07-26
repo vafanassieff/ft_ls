@@ -6,16 +6,16 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 12:51:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/26 13:32:42 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 16:10:25 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_info	*init_info()
+t_info	*init_info(void)
 {
 	t_info *info;
-	
+
 	info = malloc(sizeof(t_info));
 	if (!info)
 		exit(0);
@@ -45,12 +45,12 @@ void	init_padding(t_padding *p)
 	p->size = 0;
 	p->inode = 0;
 	p->major = 0;
-	p->minor =0;
+	p->minor = 0;
 }
 
 void	init(UINT *flag, t_list *l)
 {
-   	l->first = NULL;
-   	l->last = NULL;
+	l->first = NULL;
+	l->last = NULL;
 	*flag = 0;
 }

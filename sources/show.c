@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:13 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/26 14:57:10 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 16:38:08 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void		show_total_blocksize(t_list *l, UINT *flag)
 {
 	t_elem	*ptr;
-	int 	total;
+	int		total;
 
 	total = 0;
 	ptr = l->first;
-	while(ptr)
+	while (ptr)
 	{
 		if (!(*flag & BYTE_A) && ptr->info->name[0] == '.')
 			ptr = ptr->next;
@@ -30,57 +30,60 @@ void		show_total_blocksize(t_list *l, UINT *flag)
 		}
 	}
 	ft_putstr("total ");
-   	ft_putnbr(total);
-   	ft_putchar('\n');
+	ft_putnbr(total);
+	ft_putchar('\n');
+}
+
+static void	show_loop(t_elem *pelem, UINT *flag, t_padding *p)
+{
+	if (pelem->info->name[0] != '.')
+	{
+		if (*flag & BYTE_L)
+			print_long(pelem->info, flag, p);
+		else
+			print_format(pelem->info, flag, p);
+	}
+	else if (*flag & BYTE_A)
+	{
+		if (*flag & BYTE_L)
+			print_long(pelem->info, flag, p);
+		else
+			print_format(pelem->info, flag, p);
+	}
 }
 
 void		show_elem(t_list *l, UINT *flag)
 {
-	t_elem 		*pelem;
+	t_elem		*pelem;
 	t_padding	p;
 
 	pelem = l->first;
-	if(pelem->info->is_dir == -1)
+	if (pelem->info->is_dir == -1)
 	{
 		ft_putendl(pelem->info->name);
-		return;
+		return ;
 	}
 	if (*flag & BYTE_L)
 		show_total_blocksize(l, flag);
 	get_padding(&p, l, flag);
-	while(pelem)
-   	{
-		if (pelem->info->name[0] != '.')
-		{
-			if (*flag & BYTE_L)
-				print_long(pelem->info, flag, &p);
-			else
-				print_format(pelem->info, flag, &p);
-		}
-		else if (*flag & BYTE_A)
-		{
-			if (*flag & BYTE_L)
-				print_long(pelem->info, flag, &p);
-			else
-				print_format(pelem->info, flag, &p);
-		}
-    	 pelem = pelem->next;
-   }
+	while (pelem)
+	{
+		show_loop(pelem, flag, &p);
+		pelem = pelem->next;
+	}
 }
 
-void	show_file(t_list *arg_list, int nb, UINT *flag)
+void		show_file(t_list *arg_list, int nb, UINT *flag, int i)
 {
-	t_elem 	*tmp;
-	t_elem	*remove;
-	int 	i;
+	t_elem		*tmp;
+	t_elem		*remove;
 	t_padding	p;
 
 	tmp = arg_list->first;
-	i = 0;
 	get_padding(&p, arg_list, flag);
 	while (tmp)
 	{
-		if(tmp->info->is_dir == 0)
+		if (tmp->info->is_dir == 0)
 		{
 			if (*flag & BYTE_L)
 				print_long(tmp->info, flag, &p);

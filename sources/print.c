@@ -6,13 +6,13 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 16:47:48 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/26 14:56:36 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 16:20:17 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_put_whitespace(int nb)
+static void	ft_put_whitespace(int nb)
 {
 	while (nb > 0)
 	{
@@ -21,14 +21,8 @@ void	ft_put_whitespace(int nb)
 	}
 }
 
-void	print_long(t_info *info, UINT *flag, t_padding *p)
+static void	print_long_next(t_info *info, t_padding *p)
 {
-	if (*flag & BYTE_I)
-	{
-		ft_put_whitespace(p->inode - get_int_len(info->inode));
-		ft_putnbr(info->inode);
-		ft_put_whitespace(1);
-	}
 	ft_putchar(info->type);
 	ft_putstr(info->mode);
 	ft_put_whitespace(p->link - get_int_len(info->nb_link) + 2);
@@ -48,19 +42,34 @@ void	print_long(t_info *info, UINT *flag, t_padding *p)
 	}
 	else
 	{
-		ft_put_whitespace(p->size - get_int_len(info->size) + 2 + p->major + p->minor);
+		ft_put_whitespace(p->size - get_int_len(info->size)
+			+ 2 + p->major + p->minor);
 		ft_putnbr(info->size);
 	}
+}
+
+void		print_long(t_info *info, UINT *flag, t_padding *p)
+{
+	if (*flag & BYTE_I)
+	{
+		ft_put_whitespace(p->inode - get_int_len(info->inode));
+		ft_putnbr(info->inode);
+		ft_put_whitespace(1);
+	}
+	print_long_next(info, p);
 	ft_putstr(" ");
 	ft_putstr(info->m_date);
 	ft_putstr(" ");
 	ft_putendl(info->name);
 }
 
-void	print_format(t_info *info, UINT *flag, t_padding *p)
+void		print_format(t_info *info, UINT *flag, t_padding *p)
 {
-	p->link = 0;
 	if (*flag & BYTE_I)
-		ft_putstr("toto");
+	{
+		ft_put_whitespace(p->inode - get_int_len(info->inode));
+		ft_putnbr(info->inode);
+		ft_put_whitespace(1);
+	}
 	ft_putendl(info->name);
 }

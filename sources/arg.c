@@ -6,19 +6,19 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 16:19:04 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/26 15:05:48 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 18:01:33 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void 	fill_arg(UINT *flag, t_list *l, int nb)
+void		fill_arg(UINT *flag, t_list *l, int nb)
 {
 	t_list			cur;
 	t_elem			*arg;
 
 	arg = l->first;
-	while(arg)
+	while (arg)
 	{
 		cur.first = NULL;
 		cur.last = NULL;
@@ -28,9 +28,9 @@ void 	fill_arg(UINT *flag, t_list *l, int nb)
 			ft_putendl(":");
 		}
 		read_folder(&cur, arg->info->path, flag);
-		sort_list(cur.first, flag);
+		sort_list(&cur, flag);
 		show_elem(&cur, flag);
-		if (arg->next != NULL && !(*flag & BYTE_R))
+		if (arg->next != NULL)
 			ft_putchar('\n');
 		if (*flag & BYTE_R)
 			recursive(flag, &cur, cur.last);
@@ -39,9 +39,9 @@ void 	fill_arg(UINT *flag, t_list *l, int nb)
 	}
 }
 
-void	get_arg(int argc, char ** argv, UINT *flag, t_list *list)
+void		get_arg(int argc, char **argv, UINT *flag, t_list *list)
 {
-	int 	i;
+	int		i;
 	int		test;
 	t_info	*info;
 
@@ -52,7 +52,7 @@ void	get_arg(int argc, char ** argv, UINT *flag, t_list *list)
 		if (argv[i][0] == '-' && argv[i][1])
 			add_flag(flag, argv[i]);
 		else
-			break;
+			break ;
 	}
 	while (i < argc)
 	{
@@ -68,19 +68,44 @@ void	get_arg(int argc, char ** argv, UINT *flag, t_list *list)
 	}
 }
 
-void	verif_arg(t_list *l, UINT *flag)
+static void	verif_arg_next(struct stat *s, t_elem *tmp, UINT *flag)
 {
-	t_elem	*tmp;
-	t_elem	*remove;
-	t_stat 	s;
 	char	*join;
+
+	if (S_ISDIR(s->st_mode) && !(*flag & BYTE_D))
+	{
+		tmp->info->is_dir = 1;
+		if (ft_strcmp(tmp->info->name, ".") != 0
+		&& ft_strcmp(tmp->info->name, "./") != 0
+		&& tmp->info->name[0] != '/')
+		{
+			join = ft_strjoin(tmp->info->path, tmp->info->name);
+			free(tmp->info->path);
+			tmp->info->path = ft_strdup(join);
+			free(join);
+		}
+		else
+		{
+			free(tmp->info->path);
+			tmp->info->path = ft_strdup(tmp->info->name);
+		}
+	}
+	else
+		tmp->info->is_dir = 0;
+}
+
+void		verif_arg(t_list *l, UINT *flag)
+{
+	t_elem		*tmp;
+	t_elem		*remove;
+	struct stat	s;
 
 	tmp = l->first;
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->info->name, "") == 0)
 			error_fts_open();
-		else if (lstat(tmp->info->name,&s) < 0)
+		else if (lstat(tmp->info->name, &s) < 0)
 		{
 			get_perror(tmp->info->name, 0);
 			remove = tmp;
@@ -89,24 +114,7 @@ void	verif_arg(t_list *l, UINT *flag)
 		}
 		else
 		{
-			if (S_ISDIR(s.st_mode) && !(*flag & BYTE_D))
-			{
-				tmp->info->is_dir = 1;
-				if (ft_strcmp(tmp->info->name, ".") != 0 && ft_strcmp(tmp->info->name, "./") != 0 && tmp->info->name[0] != '/')
-				{
-					join = ft_strjoin(tmp->info->path, tmp->info->name);
-					free(tmp->info->path);
-					tmp->info->path = ft_strdup(join);
-					free(join);
-				}
-				else
-				{
-					free(tmp->info->path);
-					tmp->info->path = ft_strdup(tmp->info->name);
-				}
-			}
-			else
-				tmp->info->is_dir = 0;
+			verif_arg_next(&s, tmp, flag);
 			tmp = tmp->next;
 		}
 	}
