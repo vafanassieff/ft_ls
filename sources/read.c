@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 18:45:30 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 17:42:23 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 14:49:22 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ void	get_link(t_info *info, t_stat *s)
 	tmp = ft_strjoin(info->path, info->name);
 	tmp_name = ft_strdup(info->name);
 	free(info->name);
-	info->name = malloc(sizeof(char *) * (s->st_size + 1));
+	info->name = malloc(sizeof(char *) * (s->st_size));
 	if (info->name == NULL)
 		exit(1);
 	r = readlink(tmp, info->name, s->st_size);
 	if (r == -1)
 		get_perror("", 1);
 	free(tmp);
+	info->name[s->st_size] = '\0';
 	tmp = ft_strjoin(tmp_name, " -> ");
 	free(tmp_name);
 	tmp_name = ft_strdup(info->name);
@@ -40,7 +41,7 @@ void	get_link(t_info *info, t_stat *s)
 void	get_long_data(t_info *info, UINT *flag, t_stat *s)
 {
 	info->type = get_type(s);
-	if (info->type == 'l')
+	if (info->type == 'l' && *flag & BYTE_L)
 		get_link(info, s);
 	if ((info->type == 'b') || (info->type == 'c'))
 	{

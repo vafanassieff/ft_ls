@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 16:47:48 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/26 01:20:06 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 14:56:36 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,21 @@ void	print_long(t_info *info, UINT *flag, t_padding *p)
 	ft_putchar(' ');
 	ft_putstr(info->owner);
 	ft_put_whitespace(p->user - (int)ft_strlen(info->owner) + 2);
-	//ft_put_whitespace(2);
 	ft_putstr(info->group);
 	ft_put_whitespace(p->group - (int)ft_strlen(info->group));
-	ft_put_whitespace(p->size - get_int_len(info->size) + 2);
-	ft_putnbr(info->size);
+	if (info->type == 'c' || info->type == 'b')
+	{
+		ft_put_whitespace(p->major - get_int_len(info->major) + 1);
+		ft_putnbr(info->major);
+		ft_putchar(',');
+		ft_put_whitespace(p->minor - get_int_len(info->minor) + 1);
+		ft_putnbr(info->minor);
+	}
+	else
+	{
+		ft_put_whitespace(p->size - get_int_len(info->size) + 2 + p->major + p->minor);
+		ft_putnbr(info->size);
+	}
 	ft_putstr(" ");
 	ft_putstr(info->m_date);
 	ft_putstr(" ");

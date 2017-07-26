@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 15:02:50 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/26 01:22:57 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 12:31:43 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static char 	*six_month(char *tmp)
 	tmpbis = ft_strjoin(tmpter, year);
 	free(tmp);
 	free(year);
+	free(tmpter);
 	return (tmpbis);
 }
 

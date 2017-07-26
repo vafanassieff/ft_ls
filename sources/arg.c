@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 16:19:04 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 15:49:06 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 15:05:48 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void 	fill_arg(UINT *flag, t_list *l, int nb)
 		read_folder(&cur, arg->info->path, flag);
 		sort_list(cur.first, flag);
 		show_elem(&cur, flag);
-		if (arg->next != NULL || *flag & BYTE_R)
+		if (arg->next != NULL && !(*flag & BYTE_R))
 			ft_putchar('\n');
 		if (*flag & BYTE_R)
-			recursive(flag, &cur);
+			recursive(flag, &cur, cur.last);
 		free_list(&cur);
 		arg = arg->next;
 	}

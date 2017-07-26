@@ -28,6 +28,7 @@ SRC =		util.c\
 			error.c\
 			init.c\
 			sort.c\
+			sort_reverse.c\
 			read.c\
 			show.c\
 			recursive.c\

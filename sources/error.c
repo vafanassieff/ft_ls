@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 15:03:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/24 16:22:40 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 14:47:51 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void 	error_opt(char opt)
 {
-	ft_putstr("ft_ls: illegal option -- ");
-	ft_putchar(opt);
-	ft_putchar('\n');
-	ft_putstr("usage: ft_ls [-");
-	ft_putstr(OPT_LIST);
-	ft_putstr("] [file ...]");
-	ft_putchar('\n');
+	ft_putstr_fd("ls: illegal option -- ", 2);
+	ft_putchar_fd(opt, 2);
+	ft_putchar_fd('\n', 2);
+	ft_putstr_fd("usage: ls [-", 2);
+	ft_putstr_fd(OPT_LIST, 2);
+	ft_putstr_fd("] [file ...]", 2);
+	ft_putchar_fd('\n', 2);
 	exit(1);
 }
 

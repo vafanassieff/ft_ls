@@ -6,13 +6,13 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 15:51:56 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/25 13:38:06 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 15:02:27 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	recursive(UINT *flag, t_list *l)
+void	recursive(UINT *flag, t_list *l, t_elem *last)
 {
 	t_elem	*elem;
 	t_list	cur;
@@ -38,8 +38,9 @@ void	recursive(UINT *flag, t_list *l)
 				ft_putstr(tmp);
 				ft_putendl(":");
 				show_elem(&cur, flag);
-				ft_putchar('\n');
-				recursive(flag, &cur);
+				if (elem != last)
+					ft_putchar('\n');
+				recursive(flag, &cur, last);
 				free_list(&cur);
 				elem = elem->next;
 			}

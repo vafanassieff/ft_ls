@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 16:36:56 by vafanass          #+#    #+#             */
-/*   Updated: 2017/07/26 01:17:44 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/07/26 14:24:13 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	get_padding(t_padding *p, t_list *l, UINT *flag)
 				p->group = ft_strlen(elem->info->group);
 			if (get_int_len(elem->info->size) > p->size)
 				p->size = get_int_len(elem->info->size);
+			if (get_int_len(elem->info->minor) > p->minor)
+				p->minor = get_int_len(elem->info->minor);
+			if (get_int_len(elem->info->major) > p->major)
+				p->major = get_int_len(elem->info->major);
 			if (*flag & BYTE_I)
 			{
 				if (get_int_len(elem->info->inode) > p->inode)
